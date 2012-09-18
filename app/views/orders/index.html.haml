@@ -1,0 +1,29 @@
+%h1 Listing orders
+
+%table.table
+  %tr
+    %th Number
+    %th Notes
+    %th Due date
+    %th Total
+    %th Client
+    %th Delivery address
+    %th
+    %th
+    %th
+
+  - @orders.each do |order|
+    %tr
+      %td= order.number
+      %td= order.notes
+      %td= order.due_date
+      %td= order.total
+      %td= order.client.name unless order.client
+      %td= order.delivery_address
+      %td= link_to 'Show', order
+      %td= link_to 'Edit', edit_order_path(order)
+      %td= link_to 'Destroy', order, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+%br
+
+= link_to 'New Order', new_order_path

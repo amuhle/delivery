@@ -78,7 +78,7 @@ end
 #
 When /^(?:|I )fill in the following:$/ do |fields|
   fields.rows_hash.each do |name, value|
-    When %{I fill in "#{name}" with "#{value}"}
+    step(%{I fill in "#{name}" with "#{value}"})
   end
 end
 
@@ -251,4 +251,14 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+When /^I follow the "([^"]*)" link for "([^"]*)"$/ do |link, element|
+  within(:xpath, "//table//tr[contains(.,'#{element}')]") do
+    click_link(link)
+  end
+end
+
+When /^I confirm popup$/ do
+  page.driver.browser.switch_to.alert.accept
 end

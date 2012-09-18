@@ -11,17 +11,68 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901134515) do
+ActiveRecord::Schema.define(:version => 20120917234115) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "address"
     t.string   "phone"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "rut"
     t.string   "contact"
+    t.integer  "supplier_id"
+  end
+
+  add_index "clients", ["supplier_id"], :name => "index_clients_on_supplier_id"
+
+  create_table "orders", :force => true do |t|
+    t.text     "notes"
+    t.datetime "due_date"
+    t.integer  "total"
+    t.integer  "client_id"
+    t.integer  "user_id"
+    t.integer  "supplier_id"
+    t.string   "delivery_address"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "number"
+  end
+
+  add_index "orders", ["client_id"], :name => "index_orders_on_client_id"
+  add_index "orders", ["number"], :name => "index_orders_on_number"
+  add_index "orders", ["supplier_id"], :name => "index_orders_on_supplier_id"
+  add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
+
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.float    "price"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "supplier_id"
+  end
+
+  add_index "products", ["supplier_id"], :name => "index_products_on_supplier_id"
+
+  create_table "products_orders", :force => true do |t|
+    t.integer "product_id"
+    t.integer "order_id"
+    t.integer "quantity"
+    t.float   "price"
+  end
+
+  create_table "suppliers", :force => true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "address"
+    t.string   "rut"
+    t.string   "contact_person"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "last_order_number", :default => 0
   end
 
   create_table "users", :force => true do |t|
@@ -37,9 +88,12 @@ ActiveRecord::Schema.define(:version => 20120901134515) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "supplier_id"
+    t.boolean  "is_admin"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["supplier_id"], :name => "index_users_on_supplier_id"
 
 end

@@ -23,6 +23,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'rails3-jquery-autocomplete'
 
 gem 'rspec-rails', :group => [:development, :test]
 gem 'haml-rails', '>= 0.3.4', :group => [:development, :test]

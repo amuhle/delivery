@@ -1,6 +1,12 @@
 Delivery::Application.routes.draw do
 
-  devise_for :users, :controllers => { :sessions => "sessions" }
+  resources :orders
+
+  resources :suppliers
+
+  resources :products
+
+  devise_for :users, :controllers => { :sessions => "sessions" , :registrations => "registrations"}
 
   resources :clients
 
