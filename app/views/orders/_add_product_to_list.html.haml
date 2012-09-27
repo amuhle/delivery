@@ -1,1 +1,20 @@
-.add_product_list
+%fieldset.fieldset
+  %legend Products
+  .controls.controls-row.form-inline
+    = label_tag :name
+    = text_field_tag :product_name, '', class: 'span3', data: {'autocomplete_source' => Product.order(:name).map {|u| Hash[id: u.id, label: u.name, price: u.price]}}
+    = label_tag :price
+    .input-prepend.input-append
+      %span.add-on $
+      = text_field_tag :product_price,'', class: "input-small"
+      %span.add-on .00
+    = label_tag :quantity
+    = text_field_tag :product_quantity, '', class: 'span1'
+    = submit_tag "Add Product", class: "btn btn-primary", id: "btn_add_product"
+
+  %legend Added Products
+  %table.table.table-striped
+    %th Name
+    %th Quantity
+    %th Price
+    %th Subtotal

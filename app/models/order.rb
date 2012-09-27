@@ -6,6 +6,15 @@ class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :supplier
   attr_accessible :delivery_address, :due_date, :notes, :total, :supplier_id, :client_id, :user_id
+  attr_accessor :product
+
+  def product_name
+    product 
+  end
+
+  def product_name=(value)
+    product = value
+  end
 
   private
   def set_supplier_and_order_number

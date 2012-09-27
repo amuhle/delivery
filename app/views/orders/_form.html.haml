@@ -9,17 +9,18 @@
   .field
     = f.label :client
     = f.collection_select :client_id, @clients,:id, :name
+
+  = render 'add_product_to_list'
+
   .field
     = f.label :notes
-    = f.text_area :notes, size: "48x4"
+    = f.text_area :notes, size: "64x5"
   .field
-    = f.label :due_date
-    = f.text_field :due_date
-  .field
-    = f.label :total
-    = f.number_field :total
+    .timepicker
+      = f.label :due_date
+      = f.text_field :due_date, class: 'span2'
   .field
     = f.label :delivery_address
-    = f.text_field :delivery_address
+    = f.text_field :delivery_address, class: 'span4'
   .actions
     = f.submit 'Save', class: "btn btn-primary"

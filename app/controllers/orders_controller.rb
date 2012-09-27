@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+
+#  autocomplete :product, :name, :extra_data => [:price]
+
   # GET /orders
   # GET /orders.json
   def index
@@ -24,8 +27,9 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.json
   def new
-    @order = Order.new
-    @clients = current_user.supplier.clients
+    @order    = Order.new
+    @clients  = current_user.supplier.clients
+    @products = Product.where(:supplier_id => current_user.supplier.id)
 
     respond_to do |format|
       format.html # new.html.erb
