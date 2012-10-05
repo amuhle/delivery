@@ -1,0 +1,26 @@
+= form_for @order do |f|
+  -if @order.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
+      %ul
+        - @order.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :client
+    = f.collection_select :client_id, @clients,:id, :name
+
+  = render 'add_product_to_list'
+
+  .field
+    = f.label :notes
+    = f.text_area :notes, size: "64x5"
+  .field
+    .timepicker
+      = f.label :due_date
+      = f.text_field :due_date, class: 'span2'
+  .field
+    = f.label :delivery_address
+    = f.text_field :delivery_address, class: 'span4'
+  .actions
+    = f.submit 'Save', class: "btn btn-primary"
