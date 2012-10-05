@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delivery</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+		
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/assets/bootstrap-responsive.css" rel="stylesheet">
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">Delivery</a>
+        <div class="nav-collapse collapse">
+          <% if current_user %>
+          <p class="navbar-text pull-right">
+            Logged in as <a href="#" class="navbar-link"><%= current_user.email %></a>
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+            </p>
+          <ul class="nav">
+            <li class="active"><a href="/orders">Orders</a></li>
+            <li><a href="/clients">Clients</a></li>
+            <li><a href="/products">Products</a></li>
+          </ul>
+          <% end %>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+        <!--Sidebar content-->
+      </div>
+      <div class="span10">
+        <%= yield %>
+      </div>
+    </div>
+    <hr>
+      <footer>
+        <p>&copy; VAIRIX Software Development 2012</p>
+      </footer>
+  </div><!--/.fluid-container-->
+</body>
+</html>

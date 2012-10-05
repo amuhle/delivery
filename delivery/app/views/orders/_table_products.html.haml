@@ -1,0 +1,21 @@
+%table{ id: 'tableProducts', class: 'table table-striped'}
+  %tbody 
+    %tr{id: '0'}
+      %th{ class: 'span2'} Name
+      %th{ class: 'span2'} Quantity
+      %th{ class: 'span2'} Price
+      %th{ calss: 'spna2'} Subtotal
+      - if !@order.blank? && !@order.product_orders.blank? 
+        %th{ class: 'span2'} Options
+        %th{ class: 'span2'}
+          - total = 0  
+        - @order.product_orders.each do |p|
+          %tr{ id:p.product.id} 
+            %td= p.product.name
+            %td= p.quantity
+            %td= p.price 
+            %td= p.price * p.quantity
+            %td <a class="btn btn-link" id=p.product.id >eliminar</a>
+.controls.controls-row.form-inline
+  = label_tag :total_lb, 'Total:', class: 'total', id: 'total_lb'
+  = label_tag :total, @order.total.to_s, class: 'total', id: 'total'

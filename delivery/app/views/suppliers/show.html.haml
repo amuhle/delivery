@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @supplier.name
+%p
+  %b Phone:
+  = @supplier.phone
+%p
+  %b Email:
+  = @supplier.email
+%p
+  %b Address:
+  = @supplier.address
+%p
+  %b Rut:
+  = @supplier.rut
+%p
+  %b Contact person:
+  = @supplier.contact_person
+
+= link_to 'Edit', edit_supplier_path(@supplier)
+\|
+= link_to 'Back', suppliers_path
