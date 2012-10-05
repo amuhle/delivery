@@ -11,10 +11,10 @@
     = label_tag :quantity
     = text_field_tag :product_quantity, '', class: 'span1'
     = submit_tag "Add Product", class: "btn btn-primary", id: "btn_add_product"
+    = hidden_field_tag :product_id, id: 'product_id'
 
   %legend Added Products
-  %table.table.table-striped
-    %th Name
-    %th Quantity
-    %th Price
-    %th Subtotal
+
+  = render 'table_products'
+
+  

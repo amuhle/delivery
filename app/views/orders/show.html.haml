@@ -22,6 +22,8 @@
   %b Delivery address:
   = @order.delivery_address
 
+= render 'table_products'
+
 = link_to 'Edit', edit_order_path(@order)
 \|
 = link_to 'Back', orders_path

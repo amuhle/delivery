@@ -934,7 +934,7 @@
   $.fn.modal.defaults = {
       backdrop: true
     , keyboard: true
-    , show: true
+    , show: false
   }
 
   $.fn.modal.Constructor = Modal

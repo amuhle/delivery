@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'execjs'
+gem 'therubyracer'
+
 gem 'rails', '3.2.7'
 
 # Bundle edge Rails instead:
@@ -48,4 +51,4 @@ end
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'

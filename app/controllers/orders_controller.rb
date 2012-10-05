@@ -30,6 +30,7 @@ class OrdersController < ApplicationController
     @order    = Order.new
     @clients  = current_user.supplier.clients
     @products = Product.where(:supplier_id => current_user.supplier.id)
+    @client   = Client.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,6 +52,19 @@ class OrdersController < ApplicationController
     @order.user = current_user
     respond_to do |format|
       if @order.save
+        total = 0
+        params.keys.each do |k| 
+          if k.to_s =~ /^prod_ord/
+            id = k.to_s.split('-')[1]
+            val_pri = params[k].split('-')
+            value = val_pri[0].to_i
+            price = val_pri[1].to_i
+            total += (price * value)
+            ProductOrder.create(product_id: id.to_i,order_id: @order.id,quantity: value,price: price)
+          end
+        end
+        @order.total = total
+        @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render json: @order, status: :created, location: @order }
       else
@@ -65,7 +79,7 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @clients = current_user.supplier.clients
-
+    @products = ProductOrder.where(:order_id => @order.id)
     respond_to do |format|
       if @order.update_attributes(params[:order])
         format.html { redirect_to @order, notice: 'Order was successfully updated.' }

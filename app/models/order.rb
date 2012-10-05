@@ -5,6 +5,8 @@ class Order < ActiveRecord::Base
   belongs_to :client
   belongs_to :user
   belongs_to :supplier
+  has_many :product_orders
+
   attr_accessible :delivery_address, :due_date, :notes, :total, :supplier_id, :client_id, :user_id
   attr_accessor :product
 
