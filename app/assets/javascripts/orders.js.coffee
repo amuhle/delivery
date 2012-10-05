@@ -72,9 +72,9 @@ jQuery ->
     updateTotal total
     selected_row.remove()
     false
-
-$(document).ready () -> 
-  $('#modalNewClient').modal('hiden')
-
-
-
+  
+  displayModal = ->
+    $("#modalNewClient").modal(show: true,keyboard: true,backdrop: true)
+    $("form#new_client").attr('action','new_client')
+    
+  $("a#btnCreateClient").click displayModal

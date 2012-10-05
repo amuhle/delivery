@@ -9,7 +9,7 @@
     .field
       = f.label :client
       = f.collection_select :client_id, @clients,:id, :name 
-      %a{:href=>'modalNewClient',:role=>'button',:class=>'btn',:toggle=>'modal'} Agregar
+      %a{'id' => 'btnCreateClient', 'class' => 'btn'} Agregar
 
   = render 'add_product_to_list'
 
@@ -26,12 +26,20 @@
   .actions
     = f.submit 'Save', class: "btn btn-primary"
 
-%div{'class'=>'modal', 'id'=>'modalNewClient', 'tabindex'=>'-1', 'role'=>'dialog', 'aria-labelledby'=>'myModalLabel', 'aria-hidden'=>'true'}
+%div{'aria-hidden'=>'true', 'aria-labelledby'=>'myModalLabel', 'role'=>'dialog', 'tabindex'=>'-1', 'class'=>'modal hide fade', 'id'=>'modalNewClient', 'style'=>'display: none;'}
   %div{'class'=>'modal-header'}
     %button{'type'=>'button', 'class'=>'close', 'data-dismiss'=>'modal', 'aria-hidden'=>'true'}×
     %h3{'id'=>'myModalLabel'}New client
   %div{'class'=> 'modal-body'}
-  // = form_tag('client/form')
+    = label_tag :email
+    = text_field_tag :email
+    .field
+      = label_tag :address
+      = text_field_tag :address
+    .field
+      = label_tag :phone
+      = text_field_tag :phone 
   %div{'class'=>'modal-footer'}
     %button{'class'=>'btn', 'data-dismiss'=>'modal', 'aria-hidden'=>'true'}Close
-    %button{'class'=>'btn btn-primary'}Save
+    %button{'class'=>'btn btn-primary'}Save 
+  

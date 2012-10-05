@@ -5,10 +5,9 @@
       %th{ class: 'span2'} Quantity
       %th{ class: 'span2'} Price
       %th{ calss: 'spna2'} Subtotal
+      %th{ class: 'span2'} Options
+      %th{ class: 'span2'}
       - if !@order.blank? && !@order.product_orders.blank? 
-        %th{ class: 'span2'} Options
-        %th{ class: 'span2'}
-          - total = 0  
         - @order.product_orders.each do |p|
           %tr{ id:p.product.id} 
             %td= p.product.name

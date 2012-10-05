@@ -22,7 +22,21 @@
   %b Delivery address:
   = @order.delivery_address
 
-= render 'table_products'
+%legend Products  
+%table{ id: 'tableProducts', class: 'table table-striped'}
+  %tbody 
+    %tr
+      %th{ class: 'span2'} Name
+      %th{ class: 'span2'} Quantity
+      %th{ class: 'span2'} Price
+      %th{ calss: 'spna2'} Subtotal
+      - if !@order.blank? && !@order.product_orders.blank?  
+        - @order.product_orders.each do |p|
+          %tr{ id:p.product.id} 
+            %td= p.product.name
+            %td= p.quantity
+            %td= p.price 
+            %td= p.price * p.quantity
 
 = link_to 'Edit', edit_order_path(@order)
 \|

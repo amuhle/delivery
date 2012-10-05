@@ -1,6 +1,8 @@
 Delivery::Application.routes.draw do
 
-  resources :orders
+  resources :orders do 
+    post :new_client, on: :collection
+  end
 
   resources :suppliers
 
@@ -9,6 +11,7 @@ Delivery::Application.routes.draw do
   devise_for :users, :controllers => { :sessions => "sessions" , :registrations => "registrations"}
 
   resources :clients
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -102,4 +102,18 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def new_client
+  #  @client = Client.new(params[:client])
+  #  @client.supplier_id = current_user.supplier.id
+
+  #  respond_to do |format|
+  #    if @client.save
+  #      render not
+  #    else
+  #      format.html { render action: "new" }
+  #      format.json { render json: @client.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  end
 end
