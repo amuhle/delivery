@@ -9,7 +9,7 @@
     .field
       = f.label :client
       = f.collection_select :client_id, @clients,:id, :name 
-      %a{'id' => 'btnCreateClient', 'class' => 'btn'} Create
+      %a{'id' => 'btnCreateClient', 'class' => 'btn'} Agregar
 
   = render 'add_product_to_list'
 
@@ -38,7 +38,6 @@
           %ul
           - @client.errors.full_messages.each do |msg|
             %li= msg
-
       .field
         = f.label :name
         = f.text_field :name
@@ -57,8 +56,10 @@
       .field
         = f.label :phone
         = f.text_field :phone
-  %div{'class' => 'modal-footer'}
-    %button{ 'class' => 'btn', 'data-dismiss'=>'modal', 'aria-hidden'=>'true'}Close
-    %button{ 'class' => 'btn btn-primary', 'id' => 'save_client', 'type' => 'submit'} Save
-
-
+      .controls.actions  
+        = f.submit 'Save', class: 'btn btn-primary' 
+      //= link_to "Save",method: :new_client ,remote: true
+  %div{'class'=>'modal-footer'}
+    %button{'class'=>'btn', 'data-dismiss'=>'modal', 'aria-hidden'=>'true'}Close
+    
+  

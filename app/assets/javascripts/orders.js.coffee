@@ -19,7 +19,15 @@ jQuery ->
     $('#product_quantity').val('')
     $('#product_id').val('')
     $('#product_name').focus()
-  
+ 
+  resetClientFields = -> 
+    $('#client_name').val('')
+    $('#client_rut').val('')
+    $('#client_contact').val('')
+    $('#client_address').val('')
+    $('#client_email').val('')
+    $('#client_phone').val('')
+
   validateProduct = (prod_id)->
     valid = true
     products = $('table#tableProducts tr')
@@ -75,6 +83,57 @@ jQuery ->
   
   displayModal = ->
     $("#modalNewClient").modal(show: true,keyboard: true,backdrop: true)
-    $("form#new_client").attr('action','new_client')
     
   $("a#btnCreateClient").click displayModal
+
+  saveClient = (event) ->
+    event.preventDefault()
+    name = $('#client_name').val()
+    rut = $('#client_rut').val()
+    contact = $('#client_contact').val()
+    address = $('#client_address').val()
+    email = $('#client_email').val()
+    phone = $('#client_phone').val()
+
+    $.ajax
+      type: 'post'
+      url: 'new_client'
+      data: {client: {name: name,rut: rut,address: address,contact: contact, email: email, phone: phone}}
+      datatype: 'json'
+      success:(json) ->
+        $('#order_client_id >:last').after("<option value=#{json.id}>#{json.name}</option>")
+        $('#order_client_id >:last').attr('selected',true)
+        resetClientFields()
+        $("#modalNewClient").modal('hide')
+
+  $('#save_client').click saveClient
+
+  $.validator.setDefaults({
+    debug: true,
+    success: "valid"
+    })
+
+  validateProduct = ->
+    errors = $("#fr_product").validate({
+        rules: {
+          'product_name': required: true
+          'product_price': {required: true,number: true}
+          'product_quantity':{required:true,number: true }
+        }
+        messages:{
+          'product_name':{required: 'Debe ingresrar un producto'}
+          'produc_price':{required:'Debe ingresar un precio',number: 'El precio debe ser un número'}
+          'produc_qauntity':{required: 'La cantidad debe ser numerica',number: 'La cantidad debe ser un número'}
+        }
+      debug: true,
+        #/*errorElement: 'div',*/
+        #//errorContainer: $('#errores'),
+        #submitHandler: validateProduct(form){
+        #alert('El formulario ha sido validado correctamente!')}
+      })
+      alert errors
+
+  
+
+    
+

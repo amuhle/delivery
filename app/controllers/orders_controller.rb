@@ -42,6 +42,7 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @clients = current_user.supplier.clients
+    @client = Client.new
   end
 
   # POST /orders
@@ -102,18 +103,20 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
   def new_client
-  #  @client = Client.new(params[:client])
-  #  @client.supplier_id = current_user.supplier.id
+    @client = Client.new(params[:client])
+    @client.supplier_id = current_user.supplier.id
+    
+    respond_to do |format|
+      if @client.save
+        format.json { render json: @client.to_json(only: [:id,:name]) }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+      format.js
+    end
 
-  #  respond_to do |format|
-  #    if @client.save
-  #      render not
-  #    else
-  #      format.html { render action: "new" }
-  #      format.json { render json: @client.errors, status: :unprocessable_entity }
-  #    end
-  #  end
   end
+
 end
