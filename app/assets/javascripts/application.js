@@ -13,10 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery.validate
+//= require jquery.metadata
 //= require autocomplete-rails
-//= require_tree 
-
+//= require_tree
+//= require autoNumeric
 
 $(function() {
   $("#order_due_date").timepicker({

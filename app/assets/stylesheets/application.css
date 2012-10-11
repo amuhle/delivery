@@ -11,4 +11,10 @@
  *= require_self
  *= require_tree .
  */
-
+.error-message, label.error {
+  color: #ff0000;
+  margin:0;
+  display: inline;
+  font-size: 1em !important;
+  font-weight:lighter;
+  }

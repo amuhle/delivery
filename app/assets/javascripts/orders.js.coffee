@@ -28,7 +28,7 @@ jQuery ->
     $('#client_email').val('')
     $('#client_phone').val('')
 
-  validateProduct = (prod_id)->
+  validateAddedProduct = (prod_id)->
     valid = true
     products = $('table#tableProducts tr')
     if products.length > 1
@@ -40,33 +40,42 @@ jQuery ->
           valid = false
     valid
 
+  validateProduct =(idProduct,product,quantity,price) ->
+    ret = true
+    if product is ""
+      alert "Must choose a prudct"
+      ret = false
+    else if idProduct == ""
+      alert "the product #{product} is not registered"
+      ret = false
+    else if quantity == 0
+      alert "The quantity must be greater than 0"
+      ret = false
+    else if price == 0
+      alert "The price must be greater than 0"
+      ret = false
+    else 
+      ret = validateAddedProduct(idProduct)
+    ret
+
   addProductToOrder = (event) ->
     event.preventDefault()
     event.stopPropagation()
     product = $('#product_name').val()
-    total = parseInt($("#total").text())
-    if product != ""
-      prod_id = $('#product_id').val()
-      if prod_id isnt ""
-        prod_id = parseInt(prod_id)
-        # obtengo la cantidad y el precio
-        quantity = parseInt($('#product_quantity').val())
-        price = parseInt($('#product_price').val())
-        subtotal = price * quantity
-        agrego = validateProduct(prod_id)
-        if agrego == true
-          $('table#tableProducts tr:last').after("<tr id='#{prod_id}'><td class='span4'>#{product}</td><td class='span4'>#{quantity}</td><td class='span4'>#{price}</td><td class='span4'>#{subtotal}</td><td class='span4'><a class='btn btn-link' id='#{prod_id}'>eliminar</a></td><td><input type='hidden' name='prod_ord-#{prod_id}' value='#{quantity}-#{price}'/></td></tr>")
-          $('table#tableProducts').on("click","a##{prod_id}",removeProductFromOrder)
-          total = total + subtotal
-          updateTotal total
-          resetFields()
-      else
-        alert "El producto #{product} no está registrado"
-        resetFields()
-    else 
-      alert("Debe ingresar un producto")
-    false
-  
+    quantity = parseInt($('#product_quantity').autoNumericGet(aSep:'',aDec:'.'))
+    price = parseFloat($('#product_price').autoNumericGet(aSep:'',aDec:'.'))
+    total = parseFloat($("#total").autoNumericGet(aSep:'',aDec:'.'))
+    prod_id = $('#product_id').val()
+    validator = validateProduct(prod_id,product,quantity,price)
+    if validator
+      prod_id = parseInt(prod_id)
+      subtotal = price * quantity
+      $('table#tableProducts tr:last').after("<tr id='#{prod_id}'><td class='span4'>#{product}</td><td class='span4'>#{quantity}</td><td class='span4'>#{price}</td><td class='span4'>#{subtotal}</td><td class='span4'><a class='btn btn-link' id='#{prod_id}'>eliminar</a></td><td><input type='hidden' name='prod_ord-#{prod_id}' value='#{quantity}-#{price}'/></td></tr>")
+      $('table#tableProducts').on("click","a##{prod_id}",removeProductFromOrder)
+      total = total + subtotal
+      updateTotal total
+      resetFields()
+
   $('#btn_add_product').click addProductToOrder
 
   removeProductFromOrder = (event) ->
@@ -84,7 +93,7 @@ jQuery ->
   displayModal = ->
     $("#modalNewClient").modal(show: true,keyboard: true,backdrop: true)
     
-  $("a#btnCreateClient").click displayModal
+  $("#btnCreateClient").click displayModal
 
   saveClient = (event) ->
     event.preventDefault()
@@ -105,35 +114,16 @@ jQuery ->
         $('#order_client_id >:last').attr('selected',true)
         resetClientFields()
         $("#modalNewClient").modal('hide')
+        false
 
   $('#save_client').click saveClient
-
-  $.validator.setDefaults({
-    debug: true,
-    success: "valid"
-    })
-
-  validateProduct = ->
-    errors = $("#fr_product").validate({
-        rules: {
-          'product_name': required: true
-          'product_price': {required: true,number: true}
-          'product_quantity':{required:true,number: true }
-        }
-        messages:{
-          'product_name':{required: 'Debe ingresrar un producto'}
-          'produc_price':{required:'Debe ingresar un precio',number: 'El precio debe ser un número'}
-          'produc_qauntity':{required: 'La cantidad debe ser numerica',number: 'La cantidad debe ser un número'}
-        }
-      debug: true,
-        #/*errorElement: 'div',*/
-        #//errorContainer: $('#errores'),
-        #submitHandler: validateProduct(form){
-        #alert('El formulario ha sido validado correctamente!')}
-      })
-      alert errors
-
   
+  autoNumericField = (idElement) ->
+   convertInput = $("##{idElement}").autoNumericGet(aSep:' ',aDec:'.')
+   $("##{idElement}").autoNumericSet(convertInput)
+   false
 
-    
+  $('#product_price').blur ->
+    autoNumericField productPrice
+  
 
