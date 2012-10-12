@@ -15,6 +15,7 @@
             %td= p.price 
             %td= p.price * p.quantity
             %td <a class="btn btn-link" id=p.product.id >eliminar</a>
+            %td <input type='hidden' value= p.quantity-p.price name='prod_ord-'p.product.id>
 .controls.controls-row.form-inline
   = label_tag :total_lb, 'Total:', class: 'total', id: 'total_lb'
   = label_tag :total, @order.total.to_s, class: 'total', id: 'total'

@@ -5,11 +5,22 @@
       %ul
         - @order.errors.full_messages.each do |msg|
           %li= msg
-  .controls.controls-row.form-inline
-    .field
-      = f.label :client
-      = f.collection_select :client_id, @clients,:id, :name 
-      %a{'id' => 'btnCreateClient', 'class' => 'btn'} Create
+  %fieldset.fieldset{ :id => 'fieldset_client'}
+    .controls.form-inline
+      .controls.form-inline
+        = radio_button_tag(:option, "name")
+        = label_tag :name
+      = search_field(:client, :name, :onsearch => true, :style => "display:none")
+      .controls.form-inline
+        = radio_button_tag(:option, "phone")
+        = label_tag :phone
+      = phone_field("client","phone", :style => "display:none")
+      .controls.form-inline
+        = radio_button_tag(:option, "final_client")
+        = label_tag :final_client
+      = search_field(:order,:final_client,:onsearch => true, :style => "display:none")
+    //= f.collection_select :client_id, @clients,:id, :name 
+    //%a{'id' => 'btnCreateClient', 'class' => 'btn'} Create
 
   = render 'add_product_to_list'
 

@@ -1,11 +1,16 @@
+$( -> 
+    $('#product_price').iMask(type: 'number')
+    $('#product_quantity').iMask(type: 'number')
+    false
+)
 jQuery ->
   $('#product_name').autocomplete
     source: $('#product_name').data('autocomplete-source') 
     select: (event,ui) ->
-      $("#product_price").val(ui.item.price)
+      $("#product_price").val(ui.item.price).iMask(type: 'number')
       $("#product_quantity").val('1')
       $("#product_id").val(ui.item.id)
-      $("#produvt_name").focus()
+      $("#product_name").focus()
   
   updateTotal = (total) ->
     $('#total').fadeOut()
@@ -62,9 +67,13 @@ jQuery ->
     event.preventDefault()
     event.stopPropagation()
     product = $('#product_name').val()
-    quantity = parseInt($('#product_quantity').autoNumericGet(aSep:'',aDec:'.'))
-    price = parseFloat($('#product_price').autoNumericGet(aSep:'',aDec:'.'))
-    total = parseFloat($("#total").autoNumericGet(aSep:'',aDec:'.'))
+    quantity = $('#product_quantity').val()
+    quantity = parseFloat(quantity.replace(",",""))
+    price = $('#product_price').val()
+    price = parseFloat(price.replace(",",""))
+    total = parseFloat($("#total").text())
+    if not $.isNumeric(total)
+      total = 0
     prod_id = $('#product_id').val()
     validator = validateProduct(prod_id,product,quantity,price)
     if validator
@@ -117,13 +126,11 @@ jQuery ->
         false
 
   $('#save_client').click saveClient
-  
-  autoNumericField = (idElement) ->
-   convertInput = $("##{idElement}").autoNumericGet(aSep:' ',aDec:'.')
-   $("##{idElement}").autoNumericSet(convertInput)
-   false
 
-  $('#product_price').blur ->
-    autoNumericField productPrice
+  $('table#tableProducts').on("click",".btn.btn-link",removeProductFromOrder)
   
-
+  showClientName = -> 
+    $('#client_name').style.display="block"
+    $('#client_phone').style.display="none"
+  
+  $('#fieldset_client').on("selected", "#option_name",showClientName)
