@@ -2,7 +2,7 @@
   %legend Products
   .controls.controls-row.form-inline
     = label_tag :name
-    = text_field_tag :product_name, '', class: 'span3', data: {'autocomplete_source' => Product.order(:name).map {|u| Hash[id: u.id, label: u.name, price: u.price]}},"data-content" => "The name of product is required",'rel'=> "popover",'data-original-title'=> "Error Product Name"
+    = text_field_tag :product_name, '', class: 'span3', data: {'autocomplete_source' => Product.order(:name).map {|u| Hash[id: u.id, label: u.name, price: u.price]}}
     = label_tag :price
     .input-prepend.input-append
       %span.add-on $

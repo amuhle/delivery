@@ -7,7 +7,7 @@ jQuery ->
   $('#product_name').autocomplete
     source: $('#product_name').data('autocomplete-source') 
     select: (event,ui) ->
-      $("#product_price").val(ui.item.price).iMask(type: 'number')
+      $("#product_price").val(ui.item.price)
       $("#product_quantity").val('1')
       $("#product_id").val(ui.item.id)
       $("#product_name").focus()
@@ -32,6 +32,10 @@ jQuery ->
     $('#client_address').val('')
     $('#client_email').val('')
     $('#client_phone').val('')
+  
+  displayAlert = (mensaje) ->
+    $('#alert').attr('style','display:block')
+    $('#error_message').text("#{mensaje}")
 
   validateAddedProduct = (prod_id)->
     valid = true
@@ -40,7 +44,7 @@ jQuery ->
       for pr in products
         pr_id = parseInt(pr.id)
         if pr_id == prod_id
-          alert 'Producto ya fue agregado a la orden'
+          displayAlert('The product is already added')
           resetFields()
           valid = false
     valid
@@ -48,16 +52,16 @@ jQuery ->
   validateProduct =(idProduct,product,quantity,price) ->
     ret = true
     if product is ""
-      alert "Must choose a prudct"
+      displayAlert("Must choose a prudct")
       ret = false
     else if idProduct == ""
-      alert "the product #{product} is not registered"
+      displayAlert("the product #{product} is not registered")
       ret = false
     else if quantity == 0
-      alert "The quantity must be greater than 0"
+      displayAlert("The quantity must be greater than 0")
       ret = false
     else if price == 0
-      alert "The price must be greater than 0"
+      displayAlert("The price must be greater than 0")
       ret = false
     else 
       ret = validateAddedProduct(idProduct)
@@ -129,8 +133,63 @@ jQuery ->
 
   $('table#tableProducts').on("click",".btn.btn-link",removeProductFromOrder)
   
-  showClientName = -> 
-    $('#client_name').style.display="block"
-    $('#client_phone').style.display="none"
+  showClientName = ->
+    $('#client_name').attr('style','display:block')
+    $('#client_phone').attr('style','display:none')
+    $('#order_final_client').attr('style','display:none')
+    $('#phone_client_name').attr('style','display:none')
+    $('#client_name').val('')
+    $('#client_phone').val('')
+    $('#order_final_client').val('')
   
-  $('#fieldset_client').on("selected", "#option_name",showClientName)
+  $("#option_name").click showClientName
+
+  showClientPhone = -> 
+    $('#client_name').attr('style','display:none')
+    $('#client_phone').attr('style','display:block')
+    $('#order_final_client').attr('style','display:none')
+    $('#client_name').val('')
+    $('#client_phone').val('')
+    $('#order_final_client').val('')
+    $('#phone_client_name').attr('style','display:none')
+  
+  $("#option_phone").click showClientPhone
+
+  showFinalClient = -> 
+    $('#client_name').attr('style','display:none')
+    $('#client_phone').attr('style','display:none')
+    $('#order_final_client').attr('style','display:block')
+    $('#client_name').val('')
+    $('#client_phone').val('')
+    $('#order_final_client').val('')
+    $('#phone_client_name').attr('style','display:none')
+  
+  $("#option_final_client").click showFinalClient
+
+  $('#client_name').autocomplete
+    source: $('#option_name').data('autocomplete-source') 
+    select: (event,ui) ->
+      $('#id_client').text(ui.item.id)
+
+  searchClient = (event) ->
+    event.preventDefault()
+    phone = parseInt($('#client_phone_number').val())
+    if $.isNumeric(phone)
+      $.ajax
+        type: 'get'
+        url: '/clients/get_by_phone'
+        data: {phone_number: phone}
+        datatype: 'json'
+        success:(json) ->
+          $('#id_client').val("")
+          $('#phone_client_name').text("")
+          $('#phone_client_name').attr('style','display:none')
+          if json[0] != undefined
+            $('#id_client').val("#{json[0].id}")
+            $('#phone_client_name').text("#{json[0].name}")
+            $('#phone_client_name').attr('style','display:block')
+
+  $('#btn_search_client').click searchClient
+
+
+

@@ -5,20 +5,30 @@
       %ul
         - @order.errors.full_messages.each do |msg|
           %li= msg
-  %fieldset.fieldset{ :id => 'fieldset_client'}
+  
+  .alert.alert-error{ :id => 'alert', :style => 'display:none'}
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    = label_tag :error, '', :id => 'error_message'
+
+  %fieldset.fieldset
     .controls.form-inline
       .controls.form-inline
         = radio_button_tag(:option, "name")
-        = label_tag :name
-      = search_field(:client, :name, :onsearch => true, :style => "display:none")
+        = label_tag :client_name
+        = text_field_tag :client_name,'' ,:id => 'client_name' ,:style => "display:none",data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name]}}
       .controls.form-inline
         = radio_button_tag(:option, "phone")
-        = label_tag :phone
-      = phone_field("client","phone", :style => "display:none")
+        = label_tag :client_phone
+        .content{ :id => 'client_phone', :style => "display:none"}
+          .controls.form-inline
+            = text_field_tag :client_phone_number
+            %a{ :id => 'btn_search_client', :class => 'btn', :remote => true }Search
+            = label_tag :phone_client_name, '', :id => 'phone_client_name',:style => 'display:none' 
       .controls.form-inline
         = radio_button_tag(:option, "final_client")
         = label_tag :final_client
       = search_field(:order,:final_client,:onsearch => true, :style => "display:none")
+      = hidden_field_tag :id_client
     //= f.collection_select :client_id, @clients,:id, :name 
     //%a{'id' => 'btnCreateClient', 'class' => 'btn'} Create
 
