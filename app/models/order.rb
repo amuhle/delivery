@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
   belongs_to :supplier
   has_many :product_orders
 
-  attr_accessible :delivery_address, :due_date, :notes, :total, :supplier_id, :client_id, :user_id
+  attr_accessible :delivery_address, :due_date, :notes, :total, :supplier_id, :client_id, :user_id, :final_client
   attr_accessor :product
 
   def product_name

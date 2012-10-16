@@ -7,7 +7,7 @@
           %li= msg
   
   .alert.alert-error{ :id => 'alert', :style => 'display:none'}
-    <button type="button" class="close" data-dismiss="alert">×</button>
+    %button{ "type" => "button", "class" => "close", "data-dismiss" => "alert"}×
     = label_tag :error, '', :id => 'error_message'
 
   %fieldset.fieldset
@@ -15,22 +15,23 @@
       .controls.form-inline
         = radio_button_tag(:option, "name")
         = label_tag :client_name
-        = text_field_tag :client_name,'' ,:id => 'client_name' ,:style => "display:none",data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name]}}
+        .content{ :id => "content_client_name", :style => "display:none"}
+          = text_field_tag :client_name,'' ,:id => 'search_client_name', data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name, address: u.address]}}
+          %a{'id' => 'btn_create_client', 'class' => 'btn'} Create
       .controls.form-inline
         = radio_button_tag(:option, "phone")
         = label_tag :client_phone
-        .content{ :id => 'client_phone', :style => "display:none"}
+        .content{ :id => 'content_client_phone', :style => "display:none"}
           .controls.form-inline
             = text_field_tag :client_phone_number
-            %a{ :id => 'btn_search_client', :class => 'btn', :remote => true }Search
-            = label_tag :phone_client_name, '', :id => 'phone_client_name',:style => 'display:none' 
+            %a{ :id => 'btn_search_client', :class => 'btn'}Search
+          %span{:style => 'display:none', :id => 'phone_client_name'}
       .controls.form-inline
         = radio_button_tag(:option, "final_client")
         = label_tag :final_client
       = search_field(:order,:final_client,:onsearch => true, :style => "display:none")
       = hidden_field_tag :id_client
     //= f.collection_select :client_id, @clients,:id, :name 
-    //%a{'id' => 'btnCreateClient', 'class' => 'btn'} Create
 
   = render 'add_product_to_list'
 

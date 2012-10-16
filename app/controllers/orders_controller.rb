@@ -109,9 +109,9 @@ class OrdersController < ApplicationController
     
     respond_to do |format|
       if @client.save
-        format.json { render json: @client.to_json(only: [:id,:name]) }
+        format.json { render json: @client.to_json(only: [:id,:name,:address]) }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new_client" }
         format.json { render json: @client.errors, status: :unprocessable_entity }
       end
       format.js

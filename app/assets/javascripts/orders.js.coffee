@@ -106,7 +106,7 @@ jQuery ->
   displayModal = ->
     $("#modalNewClient").modal(show: true,keyboard: true,backdrop: true)
     
-  $("#btnCreateClient").click displayModal
+  $("#btn_create_client").click displayModal
 
   saveClient = (event) ->
     event.preventDefault()
@@ -123,8 +123,9 @@ jQuery ->
       data: {client: {name: name,rut: rut,address: address,contact: contact, email: email, phone: phone}}
       datatype: 'json'
       success:(json) ->
-        $('#order_client_id >:last').after("<option value=#{json.id}>#{json.name}</option>")
-        $('#order_client_id >:last').attr('selected',true)
+        $('#id_client').val("#{json.id}")
+        $('#search_client_name').val("#{json.name}")
+        $('#order_delivery_address').val("#{json.address}")
         resetClientFields()
         $("#modalNewClient").modal('hide')
         false
@@ -134,42 +135,43 @@ jQuery ->
   $('table#tableProducts').on("click",".btn.btn-link",removeProductFromOrder)
   
   showClientName = ->
-    $('#client_name').attr('style','display:block')
-    $('#client_phone').attr('style','display:none')
+    $('#content_client_name').attr('style','display:block')
+    $('#content_client_phone').attr('style','display:none')
     $('#order_final_client').attr('style','display:none')
     $('#phone_client_name').attr('style','display:none')
-    $('#client_name').val('')
-    $('#client_phone').val('')
+    $('#search_client_name').val('')
+    $('#phone_client_name').val('')
     $('#order_final_client').val('')
   
   $("#option_name").click showClientName
 
   showClientPhone = -> 
-    $('#client_name').attr('style','display:none')
-    $('#client_phone').attr('style','display:block')
+    $('#content_client_name').attr('style','display:none')
+    $('#content_client_phone').attr('style','display:block')
     $('#order_final_client').attr('style','display:none')
-    $('#client_name').val('')
-    $('#client_phone').val('')
+    $('#search_client_name').val('')
+    $('#phone_client_name').val('')
     $('#order_final_client').val('')
     $('#phone_client_name').attr('style','display:none')
   
   $("#option_phone").click showClientPhone
 
   showFinalClient = -> 
-    $('#client_name').attr('style','display:none')
-    $('#client_phone').attr('style','display:none')
+    $('#content_client_name').attr('style','display:none')
+    $('#content_client_phone').attr('style','display:none')
     $('#order_final_client').attr('style','display:block')
-    $('#client_name').val('')
-    $('#client_phone').val('')
+    $('#search_client_name').val('')
+    $('#phone_client_name').val('')
     $('#order_final_client').val('')
     $('#phone_client_name').attr('style','display:none')
   
   $("#option_final_client").click showFinalClient
 
-  $('#client_name').autocomplete
-    source: $('#option_name').data('autocomplete-source') 
+  $('#search_client_name').autocomplete
+    source: $('#search_client_name').data('autocomplete-source') 
     select: (event,ui) ->
       $('#id_client').text(ui.item.id)
+      $('#order_delivery_address').val(ui.item.address)
 
   searchClient = (event) ->
     event.preventDefault()
@@ -184,10 +186,16 @@ jQuery ->
           $('#id_client').val("")
           $('#phone_client_name').text("")
           $('#phone_client_name').attr('style','display:none')
-          if json[0] != undefined
+          if json[0] != undefined 
             $('#id_client').val("#{json[0].id}")
             $('#phone_client_name').text("#{json[0].name}")
-            $('#phone_client_name').attr('style','display:block')
+            $('#order_delivery_address').val("#{json[0].address}")
+            $('#phone_client_name').attr('style','display:block,height:100px,width:100px')
+            $('#phone_client_name').attr('class', 'label label-info')
+          else
+            $('#phone_client_name').text("Unregistered client")
+            $('#phone_client_name').attr('style','display:block,height:100px,width:100px')
+            $('#phone_client_name').attr('class', 'label label-important')
 
   $('#btn_search_client').click searchClient
 

@@ -87,7 +87,7 @@ class ClientsController < ApplicationController
   def get_by_phone
     @client = Client.where(:phone => params[:phone_number])
     respond_to do |format|
-      format.json { render json: @client.to_json(only: [:id,:name]) }
+      format.json { render json: @client.to_json(only: [:id,:name,:address]) }
     end
   end
 end
