@@ -1,12 +1,21 @@
 class OrdersController < ApplicationController
 
-#  autocomplete :product, :name, :extra_data => [:price]
-
+  
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
-
+    if params.length > 2
+      pay = to_boolean(params[:pay])
+      active = to_boolean(params[:active])
+      status = params[:status]
+      id_client = params[:id_client].blank? ? nil : params[:id_client].to_i
+      begin_date = params[:begin_date].blank? ? nil : date_to_datetime(params[:begin_date])
+      end_date = params[:end_date].blank? ? nil : date_to_datetime(params[:end_date])
+      @orders = Order.where("active = :active AND pay = :pay AND status = :status AND (:id_client IS NULL OR client_id = :id_client) AND (:begin IS NULL OR due_date >= :begin) AND (:end IS NULL OR :end >= due_date)", :active => active, :pay => pay,:status => status,:id_client => id_client,:begin => begin_date,:end => end_date)
+    else
+      @orders = Order.all
+    end
+    @status = ['Pending','Delivered','Delayed']
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @orders }
@@ -49,8 +58,10 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(params[:order])
-    @clients = current_user.supplier.clients
     @order.user = current_user
+    unless params[:id_client].blank?
+      @order.client_id = params[:id_client]
+    end
     respond_to do |format|
       if @order.save
         total = 0
@@ -103,6 +114,7 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
   def new_client
     @client = Client.new(params[:client])
     @client.supplier_id = current_user.supplier.id
@@ -116,7 +128,22 @@ class OrdersController < ApplicationController
       end
       format.js
     end
+  end
 
+private
+
+  def to_boolean(value)
+    return true if value == "true"
+    return false if value == "false"
+  end
+
+  def date_to_datetime(date_aux)
+    date = date_aux.split("/")
+    day = date[1].to_i
+    month = date[0].to_i
+    year = date[2].to_i
+    start_date = DateTime.new(year,month,day)
+    return start_date
   end
 
 end

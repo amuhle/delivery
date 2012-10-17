@@ -1,6 +1,9 @@
 $( -> 
     $('#product_price').iMask(type: 'number')
     $('#product_quantity').iMask(type: 'number')
+    $.datepicker.setDefaults($.datepicker.regional['fr'])
+    $('#begin_date').datepicker()
+    $('#end_date').datepicker()
     false
 )
 jQuery ->
@@ -152,6 +155,7 @@ jQuery ->
     $('#search_client_name').val('')
     $('#phone_client_name').val('')
     $('#order_final_client').val('')
+    $('#id_client').val('')
     $('#phone_client_name').attr('style','display:none')
   
   $("#option_phone").click showClientPhone
@@ -170,7 +174,7 @@ jQuery ->
   $('#search_client_name').autocomplete
     source: $('#search_client_name').data('autocomplete-source') 
     select: (event,ui) ->
-      $('#id_client').text(ui.item.id)
+      $('#id_client').val(ui.item.id)
       $('#order_delivery_address').val(ui.item.address)
 
   searchClient = (event) ->
@@ -198,6 +202,3 @@ jQuery ->
             $('#phone_client_name').attr('class', 'label label-important')
 
   $('#btn_search_client').click searchClient
-
-
-

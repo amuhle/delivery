@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015192321) do
+ActiveRecord::Schema.define(:version => 20121016175107) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
     t.string   "email"
     t.string   "address"
-    t.string   "phone"
+    t.string   "phone",       :default => "'---\n:unique: true\n'"
     t.datetime "created_at",                                        :null => false
     t.datetime "updated_at",                                        :null => false
     t.string   "rut"
@@ -35,10 +35,13 @@ ActiveRecord::Schema.define(:version => 20121015192321) do
     t.integer  "user_id"
     t.integer  "supplier_id"
     t.string   "delivery_address"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.integer  "number"
     t.string   "final_client"
+    t.string   "status",           :default => "Pending"
+    t.boolean  "pay",              :default => false
+    t.boolean  "active",           :default => false
   end
 
   add_index "orders", ["client_id"], :name => "index_orders_on_client_id"

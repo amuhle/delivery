@@ -21,6 +21,9 @@
 %p
   %b Delivery address:
   = @order.delivery_address
+%p
+  %b Final client:
+  = @order.final_client
 
 %legend Products  
 %table{ id: 'tableProducts', class: 'table table-striped'}
