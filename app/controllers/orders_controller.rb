@@ -130,6 +130,16 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update_status
+    @order = Order.find(params[:id].to_i)
+    @order.status = params[:status]
+    if @order.save
+      respond_to do |format|
+        format.json { render json: @order.to_json(only: :status) }
+      end
+    end
+  end
+
 private
 
   def to_boolean(value)

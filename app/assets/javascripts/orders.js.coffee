@@ -202,3 +202,21 @@ jQuery ->
             $('#phone_client_name').attr('class', 'label label-important')
 
   $('#btn_search_client').click searchClient
+
+  changeStatusFromOrder = ->
+    status = $(this).find("option:selected").val()
+    selected_row = ($(this).parent()).parent()
+    id = selected_row.attr('id')
+    $.ajax
+      type: 'put'
+      url: "orders/update_status"
+      data: {id: id,status: status}
+      datatype: 'json'
+      success:(json) ->
+        selected_row.removeClass()
+        selected_row.addClass(json.status) 
+          
+  $('table#tableOrders').on("change","tr #Status",changeStatusFromOrder)
+
+
+

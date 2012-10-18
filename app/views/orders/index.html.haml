@@ -25,7 +25,7 @@
     = hidden_field_tag :id_client 
     = submit_tag 'Search', :class => 'btn offset10' 
 
-%table.table
+%table.table{ :id => 'tableOrders'}
   %tr
     %th Number
     %th Client
@@ -40,19 +40,17 @@
 
 
   - @orders.each do |order|
-    %tr
+    %tr{ :id => order.id }
       %td= order.number
       %td= order.final_client.blank? ? order.client.name : order.final_client
       %td= order.delivery_address
       %td= order.due_date
       %td= order.total
       %td= order.notes
-      %td= order.status
-      //%td= select_tag 'Status',options_for_select(@status,order.status), :class => 'span10'
+      %td= select_tag 'Status',options_for_select(@status,order.status), :class => 'span10'
       %td= link_to 'Show', order
       %td= link_to 'Edit', edit_order_path(order)
       %td= link_to 'Destroy', order, data: {:confirm => 'Are you sure?'}, :method => :delete
-      %td= hidden_field_tag 'id_order', order.id
 
 %br
 

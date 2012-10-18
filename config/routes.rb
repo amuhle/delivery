@@ -2,6 +2,7 @@ Delivery::Application.routes.draw do
 
   resources :orders do 
     post :new_client, on: :collection
+    put :update_status, on: :collection 
   end
 
   resources :suppliers
