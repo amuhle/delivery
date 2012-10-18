@@ -23,11 +23,3 @@ ul.ui-autocomplete {
     }
   }
 }
-
-.Delivered{
-  background-color: #dff0d8;
-}
-
-.Delayed {
-  background-color: #f2dede;
-}

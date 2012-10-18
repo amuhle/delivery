@@ -40,7 +40,7 @@
 
 
   - @orders.each do |order|
-    %tr{ :id => order.id }
+    %tr{ :id => order.id , :class => order.status }
       %td= order.number
       %td= order.final_client.blank? ? order.client.name : order.final_client
       %td= order.delivery_address
