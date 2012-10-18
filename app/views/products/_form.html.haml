@@ -15,5 +15,8 @@
   .field
     = f.label :price
     = f.text_field :price
+  .field
+    = f.label :tax
+    = f.select :tax, options_for_select(@taxs,:selected=> @product.tax)
   .actions
     = f.submit 'Save', class: "btn btn-primary"

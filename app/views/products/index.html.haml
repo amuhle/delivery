@@ -5,6 +5,7 @@
     %th Name
     %th Description
     %th Price
+    %th Tax
     %th
     %th
     %th
@@ -14,6 +15,7 @@
       %td= product.name
       %td= product.description
       %td= product.price
+      %td= product.tax
       %td= link_to 'Show', product
       %td= link_to 'Edit', edit_product_path(product)
       %td= link_to 'Destroy', product, :data => { :confirm => 'Are you sure?' }, :method => :delete

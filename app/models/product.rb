@@ -1,5 +1,8 @@
 class Product < ActiveRecord::Base
-  attr_accessible :description, :name, :price, :supplier_id
+  
+  TAXS = [10.0,22.0]
+
+  attr_accessible :description, :name, :price, :supplier_id, :tax
 
   belongs_to :supplier
   has_many :product_orders

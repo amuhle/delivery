@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
   # GET /products/new.json
   def new
     @product = Product.new
-
+    @taxs = Product::TAXS
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
@@ -36,6 +36,7 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
+    @taxs = Product::TAXS
   end
 
   # POST /products
