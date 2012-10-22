@@ -1,29 +1,20 @@
 %h1 Listing orders
 %fieldset.fiedset
-  %form
-    .control-group
-      = label_tag :client_name, 'Client name', :class => 'control-label'
-      .controls
-        = text_field_tag :client_name,'', :id => 'search_client_name' ,data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name]}}
-    .control-group
-      = label_tag :between_date, 'Between dates', :class => 'control-label'
-      .controls
-        = text_field_tag :begin_date, '', :class => 'input-small'
-        = text_field_tag :end_date, '',:class => 'input-small'
-    .control-group
-      = label_tag :pay, 'Pay',:class => 'control-label'
-      .control
-        = select_tag :pay,options_for_select([['No',false],['Yes',true]]), :class => 'span1'
-    .control-group
-      = label_tag :active, 'Active', :class => 'control-label'
-      .control
-        = select_tag :active,options_for_select([['No',false],['Yes',true]]), :class => 'span1'
-    .contro-group
-      = label_tag :status,'Status'
-      .control
-        = select_tag :status,options_for_select(@status),:class => 'span2'
-    = hidden_field_tag :id_client 
-    = submit_tag 'Search', :class => 'btn offset10' 
+  = search_form_for @q, :url => search_orders_path, :html => {:method => :post} do |f|
+    = f.label :client_name
+    = text_field_tag :client_name, @client.name , :id => 'search_client_name' ,data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name]}}
+    = label_tag :between_date, 'Between dates' 
+    = f.text_field :due_date_gt, value: (params['q']['due_date_gt'] unless params['q'].nil?)
+    = f.text_field :due_date_lt, value: (params['q']['due_date_lt'] unless params['q'].nil?)
+    .control
+    = f.label :pay, 'Pay'
+    = f.select :pay_eq, options_for_select([['No',false],['Yes',true]], (params['q']['pay_eq'] unless params['q'].nil?)), {:class => 'span1 input-small'}
+    = f.label :active, 'Active', :class => 'control-label'
+    = f.select :active_eq, options_for_select([['No',false],['Yes',true]], (params['q']['active_eq'] unless params['q'].nil?)), :class => 'span1 input-small'
+    = f.label :status,'Status'
+    = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),:class => 'span2'
+    = hidden_field_tag :id_client, @client.id
+    = submit_tag 'Search', :class => 'btn btn-primary'
 
 %table.table{ :id => 'tableOrders', :class => 'sortable' }
   %tr
@@ -42,7 +33,7 @@
   - @orders.each do |order|
     %tr{ :id => order.id , :class => order.status }
       %td= order.number
-      %td= order.final_client.blank? ? order.client.name : order.final_client
+      %td= order.client.nil? ? order.final_client : order.client.name
       %td= order.delivery_address
       %td= order.due_date
       %td= order.total
