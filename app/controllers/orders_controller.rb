@@ -37,6 +37,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
     @order    = Order.new
+    @order.invoice_number = Order.last.blank? ? 1 : Order.last.invoice_number + 1
     @clients  = current_user.supplier.clients
     @products = Product.where(:supplier_id => current_user.supplier.id)
     @client   = Client.new

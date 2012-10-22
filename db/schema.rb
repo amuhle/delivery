@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018162519) do
+ActiveRecord::Schema.define(:version => 20121022175323) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(:version => 20121018162519) do
     t.string   "status",           :default => "Pending"
     t.boolean  "pay",              :default => false
     t.boolean  "active",           :default => false
+    t.integer  "tax"
+    t.integer  "invoice_number"
   end
 
   add_index "orders", ["client_id"], :name => "index_orders_on_client_id"

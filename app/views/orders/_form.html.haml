@@ -33,14 +33,15 @@
       = hidden_field_tag :id_client
 
   = render 'add_product_to_list'
-
+  .field
+    = f.label :invoice_number
+    = f.text_field :invoice_number
   .field
     = f.label :notes
     = f.text_area :notes, size: "64x5"
   .field
-    .timepicker
-      = f.label :due_date
-      = f.text_field :due_date, class: 'span2'
+    = f.label :due_date
+    = f.text_field :due_date
   .field
     = f.label :delivery_address
     = f.text_field :delivery_address, class: 'span4'

@@ -1,7 +1,9 @@
 $( -> 
     $('#product_price').iMask(type: 'number')
     $('#product_quantity').iMask(type: 'number')
-    $.datepicker.setDefaults($.datepicker.regional['fr'])
+    $('#order_invoice_number').iMask(	type : 'number', decDigits : 0, decSymbol : '', groupSymbol : '.')
+    $('#order_due_date').datetimepicker()
+    #$.datepicker.setDefaults($.datepicker.regional['fr'])
     $('#begin_date').datepicker()
     $('#end_date').datepicker()
     false
@@ -19,7 +21,8 @@ jQuery ->
     $('#total').fadeOut()
     $('#total').text(total.toString())
     $('#total').fadeIn()
-    $('#total_hd').val(total.toString()) 
+    $('#total_hd').val(total.toString()) w
+
   
   resetFields = ->
     $('#product_name').val('')

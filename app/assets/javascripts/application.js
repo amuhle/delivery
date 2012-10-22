@@ -12,16 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
-//= require jquery-imask
 //= require autocomplete-rails
 //= require_tree
 
-
-$(function() {
-  $("#order_due_date").timepicker({
-    hourGrid: 4,
-    minuteGrid: 10,
-    showButtonPanel: true
-  });
-});
