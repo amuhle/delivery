@@ -20,7 +20,7 @@ jQuery ->
     $('#total').fadeOut()
     $('#total').text(total.toString())
     $('#total').fadeIn()
-    $('#total_hd').val(total.toString()) w
+    $('#total_hd').val(total.toString())
 
   
   resetFields = ->
@@ -211,7 +211,7 @@ jQuery ->
     id = selected_row.attr('id')
     $.ajax
       type: 'put'
-      url: "orders/update_status"
+      url: "update_status"
       data: {id: id,status: status}
       datatype: 'json'
       success:(json) ->

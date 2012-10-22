@@ -8,11 +8,11 @@
     = f.text_field :due_date_lt, value: (params['q']['due_date_lt'] unless params['q'].nil?)
     .control
     = f.label :pay, 'Pay'
-    = f.select :pay_eq, options_for_select([['No',false],['Yes',true]], (params['q']['pay_eq'] unless params['q'].nil?)), {:class => 'span1 input-small'}
+    = f.select :pay_eq, options_for_select([['No',false],['Yes',true]], (params['q']['pay_eq'] unless params['q'].nil?)), {:class => 'span1 input-small',:include_blank => true}
     = f.label :active, 'Active', :class => 'control-label'
-    = f.select :active_eq, options_for_select([['No',false],['Yes',true]], (params['q']['active_eq'] unless params['q'].nil?)), :class => 'span1 input-small'
+    = f.select :active_eq, options_for_select([['No',false],['Yes',true]], (params['q']['active_eq'] unless params['q'].nil?)), {:class => 'span1 input-small',:include_blank => true}
     = f.label :status,'Status'
-    = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),:class => 'span2'
+    = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),{:class => 'span2',:include_blank => true}
     = hidden_field_tag :id_client, @client.id
     = submit_tag 'Search', :class => 'btn btn-primary'
 
