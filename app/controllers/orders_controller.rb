@@ -1,25 +1,26 @@
 class OrdersController < ApplicationController
 
-  
   # GET /orders
   # GET /orders.json
   def index
-    if params.length > 2
-      pay = to_boolean(params[:pay])
-      active = to_boolean(params[:active])
-      status = params[:status]
-      id_client = params[:id_client].blank? ? nil : params[:id_client].to_i
-      begin_date = params[:begin_date].blank? ? nil : date_to_datetime(params[:begin_date])
-      end_date = params[:end_date].blank? ? nil : date_to_datetime(params[:end_date])
-      @orders = Order.where("active = :active AND pay = :pay AND status = :status AND (:id_client IS NULL OR client_id = :id_client) AND (:begin IS NULL OR due_date >= :begin) AND (:end IS NULL OR :end >= due_date)", :active => active, :pay => pay,:status => status,:id_client => id_client,:begin => begin_date,:end => end_date)
-    else
-      @orders = Order.all
-    end
-    @status = ['Pending','Delivered','Delayed']
+    @orders = Order.last_twenty
+    @q = Order.search(params[:q])
+    @client = Client.new
+    
+    @status = Order::STATUS 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @orders }
     end
+  end
+
+  def search
+    @q = Order.search(params[:q])
+    @orders = @q.result(:distinct => true)
+    @client = Client.new id: params[:id_client], name: params[:client_name]
+
+    @status = Order::STATUS
+    render :index
   end
 
   # GET /orders/1

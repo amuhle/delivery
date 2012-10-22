@@ -1,4 +1,9 @@
 class Order < ActiveRecord::Base
+
+  STATUS = ['Pending','Delivered','Delayed']
+
+  scope :last_twenty, order(:created_at).limit(20)
+
   before_create :set_supplier_and_order_number
   after_create :set_last_order_number
   

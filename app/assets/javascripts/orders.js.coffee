@@ -3,9 +3,8 @@ $( ->
     $('#product_quantity').iMask(type: 'number')
     $('#order_invoice_number').iMask(	type : 'number', decDigits : 0, decSymbol : '', groupSymbol : '.')
     $('#order_due_date').datetimepicker()
-    #$.datepicker.setDefaults($.datepicker.regional['fr'])
-    $('#begin_date').datepicker()
-    $('#end_date').datepicker()
+    $('#q_due_date_gt').datepicker()
+    $('#q_due_date_lt').datepicker()
     false
 )
 jQuery ->

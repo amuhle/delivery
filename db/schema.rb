@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(:version => 20121022175323) do
     t.string   "name"
     t.string   "email"
     t.string   "address"
-    t.string   "phone",       :default => "'---\n:unique: true\n'"
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.string   "phone"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "rut"
     t.string   "contact"
     t.integer  "supplier_id"
