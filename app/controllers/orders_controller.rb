@@ -142,6 +142,26 @@ class OrdersController < ApplicationController
     end
   end
 
+  def pay
+    @order = Order.find(params[:id])
+    @order.pay = !@order.pay
+    if @order.save
+      respond_to do |format|
+        format.html { redirect_to action: 'index' }
+      end
+    end
+  end
+
+  def active
+    @order = Order.find(params[:id])
+    @order.active = !@order.active
+    if @order.save
+      respond_to do |format|
+        format.html { redirect_to action: 'index' }
+      end
+    end
+  end
+
 private
 
   def to_boolean(value)

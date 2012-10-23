@@ -4,6 +4,8 @@ Delivery::Application.routes.draw do
     post :new_client, on: :collection
     put :update_status, on: :collection 
     post :search, on: :collection, as: :search
+    get :pay, on: :member, as: :pay
+    get :active, on: :member, as: :active
   end
 
   resources :suppliers

@@ -41,14 +41,26 @@
         %td= order.total
         %td= order.notes
         %td= select_tag 'Status',options_for_select(@status,order.status), :class => 'span10'
-        %td
-          .btn-group
-            <a class = "btn btn-mini disabled">Paid</a>
-            <a class = "btn btn-mini">Unpaid</a>
-        %td
-          .btn-group
-            <a class = "btn btn-mini disabled">Active</a>
-            <a class = "btn btn-mini">Disabled</a>
+        - unless order.pay
+          %td
+            .btn-group
+              = link_to('Pay',pay_order_path(order.id),class: 'btn btn-mini')
+              = link_to('Unpayed','#',class: 'btn btn-mini disabled')
+        - else
+          %td
+            .btn-group
+              = link_to('Pay','#', class:'btn btn-mini disabled')
+              = link_to('Unpayed',pay_order_path(order.id),class: 'btn btn-mini')
+        - unless order.active
+          %td
+            .btn-group
+              = link_to('Active',active_order_path(order.id),class: 'btn btn-mini')
+              = link_to('Disable','#',class: 'btn btn-mini disabled')
+        - else
+          %td
+            .btn-group
+              = link_to('Active','#', class:'btn btn-mini disabled')
+              = link_to('Disable',active_order_path(order.id),class: 'btn btn-mini')
         %td= link_to 'Show', order
 
   %footer

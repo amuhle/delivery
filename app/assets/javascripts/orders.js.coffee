@@ -2,9 +2,9 @@ $( ->
     $('#product_price').iMask(type: 'number')
     $('#product_quantity').iMask(type: 'number')
     $('#order_invoice_number').iMask(	type : 'number', decDigits : 0, decSymbol : '', groupSymbol : '.')
-    $('#order_due_date').datetimepicker()
-    $('#q_due_date_gt').datepicker()
-    $('#q_due_date_lt').datepicker()
+    $('#order_due_date').datetimepicker(dateFormat:'dd/m/yy')
+    $('#q_due_date_gt').datepicker(dateFormat:'dd/m/yy')
+    $('#q_due_date_lt').datepicker(dateFormat:'dd/m/yy')
     false
 )
 jQuery ->
