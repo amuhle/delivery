@@ -1,48 +1,55 @@
-%h1 Listing orders
-%fieldset.fiedset
-  = search_form_for @q, :url => search_orders_path, :html => {:method => :post} do |f|
-    = f.label :client_name
-    = text_field_tag :client_name, @client.name , :id => 'search_client_name' ,data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name]}}
-    = label_tag :between_date, 'Between dates' 
-    = f.text_field :due_date_gt, value: (params['q']['due_date_gt'] unless params['q'].nil?)
-    = f.text_field :due_date_lt, value: (params['q']['due_date_lt'] unless params['q'].nil?)
-    .control
-    = f.label :pay, 'Pay'
-    = f.select :pay_eq, options_for_select([['No',false],['Yes',true]], (params['q']['pay_eq'] unless params['q'].nil?)), {:class => 'span1 input-small',:include_blank => true}
-    = f.label :active, 'Active', :class => 'control-label'
-    = f.select :active_eq, options_for_select([['No',false],['Yes',true]], (params['q']['active_eq'] unless params['q'].nil?)), {:class => 'span1 input-small',:include_blank => true}
-    = f.label :status,'Status'
-    = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),{:class => 'span2',:include_blank => true}
-    = hidden_field_tag :id_client, @client.id
-    = submit_tag 'Search', :class => 'btn btn-primary'
+%section
+  %header
+    %h1 Listing orders
+  %fieldset.fieldset
+    = search_form_for @q, :url => search_orders_path, :html => {:method => :post} do |f|
+      .content{:id => 'content_order_search'}
+        = f.label :client_name, :class => 'control-label'
+        = text_field_tag :client_name, @client.name , :id => 'search_client_name' ,data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name]}}
+        = label_tag :between_date, 'Between dates', :class => 'control-label'
+        = f.text_field :due_date_gt, value: (params['q']['due_date_gt'] unless params['q'].nil?),:class => 'input-small'
+        = f.text_field :due_date_lt, value: (params['q']['due_date_lt'] unless params['q'].nil?), :class => 'input-small'
+        = f.label :pay, 'Pay', :class => 'control-label'
+        = f.select :pay_eq, options_for_select([['No',false],['Yes',true]], (params['q']['pay_eq'] unless params['q'].nil?)),:include_blank => true
+        = f.label :active, 'Active', :class => 'control-label'
+        = f.select :active_eq, options_for_select([['No',false],['Yes',true]], (params['q']['active_eq'] unless params['q'].nil?)),:include_blank => true 
+        = f.label :status,'Status', :class => 'control-label'
+        = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),:include_blank => true
+      = hidden_field_tag :id_client, @client.id
+      = submit_tag 'Search', :class => 'btn btn-primary offset10'
 
-%table.table{ :id => 'tableOrders', :class => 'sortable' }
-  %tr
-    %th Number
-    %th Client
-    %th Delivery address
-    %th Due date
-    %th Total
-    %th Notes
-    %th Status
-    %th
-    %th
-    %th
+  %table.table{ :id => 'tableOrders', :class => 'sortable' }
+    %tr
+      %th Number
+      %th Client
+      %th Delivery address
+      %th Due date
+      %th Total
+      %th Notes
+      %th Status
+      %th Pay
+      %th Active
+      %th
 
 
-  - @orders.each do |order|
-    %tr{ :id => order.id , :class => order.status }
-      %td= order.number
-      %td= order.client.nil? ? order.final_client : order.client.name
-      %td= order.delivery_address
-      %td= order.due_date
-      %td= order.total
-      %td= order.notes
-      %td= select_tag 'Status',options_for_select(@status,order.status), :class => 'span10'
-      %td= link_to 'Show', order
-      %td= link_to 'Edit', edit_order_path(order)
-      %td= link_to 'Destroy', order, data: {:confirm => 'Are you sure?'}, :method => :delete
+    - @orders.each do |order|
+      %tr{ :id => order.id , :class => order.status }
+        %td= order.number
+        %td= order.client.nil? ? order.final_client : order.client.name
+        %td= order.delivery_address
+        %td= order.due_date
+        %td= order.total
+        %td= order.notes
+        %td= select_tag 'Status',options_for_select(@status,order.status), :class => 'span10'
+        %td
+          .btn-group
+            <a class = "btn btn-mini disabled">Paid</a>
+            <a class = "btn btn-mini">Unpaid</a>
+        %td
+          .btn-group
+            <a class = "btn btn-mini disabled">Active</a>
+            <a class = "btn btn-mini">Disabled</a>
+        %td= link_to 'Show', order
 
-%br
-
-= link_to 'New Order', new_order_path
+  %footer
+    = link_to 'New Order', new_order_path

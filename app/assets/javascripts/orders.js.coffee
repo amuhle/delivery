@@ -41,13 +41,16 @@ jQuery ->
   displayAlert = (mensaje) ->
     $('#alert').attr('style','display:block')
     $('#error_message').text("#{mensaje}")
+  
+  $('#close_message').click ->
+    $('#alert').attr('style','display:none')
 
   validateAddedProduct = (prod_id)->
     valid = true
     products = $('table#tableProducts tr')
     if products.length > 1
       for pr in products
-        pr_id = parseInt(pr.id)
+        pr_id = $(pr).attr('id')
         if pr_id == prod_id
           displayAlert('The product is already added')
           resetFields()
@@ -211,7 +214,7 @@ jQuery ->
     id = selected_row.attr('id')
     $.ajax
       type: 'put'
-      url: "update_status"
+      url: "orders/update_status"
       data: {id: id,status: status}
       datatype: 'json'
       success:(json) ->

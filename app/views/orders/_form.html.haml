@@ -7,7 +7,7 @@
           %li= msg
   
   .alert.alert-error{ :id => 'alert', :style => 'display:none'}
-    %button{ "type" => "button", "class" => "close", "data-dismiss" => "alert"}×
+    %button{ "type" => "button", "class" => "close", "id" => "close_message"}×
     = label_tag :error, '', :id => 'error_message'
 
   %fieldset.fieldset
