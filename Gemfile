@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'execjs'
 gem 'therubyracer'
 gem 'ransack'
+gem 'heroku'
 
 gem 'rails', '3.2.7'
 
@@ -52,4 +53,6 @@ end
 # gem 'capistrano'
 
 # To use debugger
-gem 'debugger'
+group :development do
+  gem 'debugger'
+end
