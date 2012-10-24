@@ -10,7 +10,6 @@ gem 'rails', '3.2.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 
 gem 'devise'
 
@@ -51,8 +50,12 @@ end
 
 # Deploy with Capistrano
 # gem 'capistrano'
+group :production do
+  gem 'pg'
+end
 
 # To use debugger
 group :development do
   gem 'debugger'
+  gem 'sqlite3'
 end
