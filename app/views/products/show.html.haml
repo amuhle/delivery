@@ -1,17 +1,20 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @product.name
-%p
-  %b Description:
-  = @product.description
-%p
-  %b Price:
-  = @product.price
-%p
-  %b Tax:
-  = @product.tax
+%legend Show
+%table
+  %tr
+    %th Name:
+    %td= @product.name
+  %tr
+    %th Description:
+    %td= @product.description
+  %tr
+    %th Price:
+    %td= @product.price
+  %tr
+    %th Tax:
+    %td= @product.tax
+%br
 
 = link_to 'Edit', edit_product_path(@product)
 \|

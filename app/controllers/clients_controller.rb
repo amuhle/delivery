@@ -18,7 +18,7 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :layout => "show" }
       format.json { render json: @client }
     end
   end

@@ -18,19 +18,18 @@
       = hidden_field_tag :id_client, @client.id
       = submit_tag 'Search', :class => 'btn btn-primary offset10'
 
-  %table.table{ :id => 'tableOrders', :class => 'sortable' }
-    %tr
-      %th Number
-      %th Client
-      %th Delivery address
-      %th Due date
-      %th Total
-      %th Notes
-      %th Status
-      %th Pay
-      %th Active
-      %th
-
+%table.index_table.sortable{ :id => 'tableOrders'}
+  %tr
+    %th Number
+    %th Client
+    %th Delivery address
+    %th Due date
+    %th Total
+    %th Notes
+    %th Status
+    %th
+    %th
+    %th
 
     - @orders.each do |order|
       %tr{ :id => order.id , :class => order.status }

@@ -1,23 +1,26 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @supplier.name
-%p
-  %b Phone:
-  = @supplier.phone
-%p
-  %b Email:
-  = @supplier.email
-%p
-  %b Address:
-  = @supplier.address
-%p
-  %b Rut:
-  = @supplier.rut
-%p
-  %b Contact person:
-  = @supplier.contact_person
+%legend Show
+%table
+  %tr
+    %th Name:
+    %td= @supplier.name
+  %tr 
+    %th Phone:
+    %td= @supplier.phone
+  %tr
+    %th Email:
+    %td= @supplier.email
+  %tr
+    %th Address:
+    %td= @supplier.address
+  %tr
+    %th Rut:
+    %td= @supplier.rut
+  %tr
+    %th Contact person:
+    %td= @supplier.contact_person
+%br
 
 = link_to 'Edit', edit_supplier_path(@supplier)
 \|

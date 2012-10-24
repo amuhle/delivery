@@ -1,32 +1,40 @@
 %p#notice= notice
 
-%p
-  %b Number:
-  = @order.number
-%p
-  %b Notes:
-  = @order.notes
-%p
-  %b Due date:
-  = @order.due_date.nil? ? '' : @order.due_date.strftime('%d/%m/%Y')
-%p
-  %b Total:
-  = @order.total
-%p
-  %b Client:
-  = @order.client.name if @order.client
-%p
-  %b User:
-  = @order.user.email if @order.user
-%p
-  %b Delivery address:
-  = @order.delivery_address
-%p
-  %b Final client:
-  = @order.final_client
+%div.main_content
+  %div.panel
+    %div.panel_contents
+      %div.attributes_table{"id" => "attributes_table"}
+        %legend Show
+        %table
+          %tr
+            %th Number:
+            %td= @order.number
+          %tr
+            %th Notes:
+            %td= @order.notes
+          %tr
+            %th Due date:
+            %td= @order.due_date
+          %tr
+            %th Total:
+            %td= @order.total
+          %tr
+            %th Client:
+            %td= @order.client.name if @order.client
+          %tr
+            %th User:
+            %td= @order.user.email if @order.user
+          %tr
+            %th Delivery address:
+            %td= @order.delivery_address
+          %tr
+            %th Final client:
+            %td= @order.final_client
+
+%br
 
 %legend Products  
-%table{ id: 'tableProducts', class: 'table table-striped'}
+%table.index_table.zebra.sortable{ id: 'tableProducts', class: 'table-striped'}
   %tbody 
     %tr
       %th{ class: 'span2'} Name

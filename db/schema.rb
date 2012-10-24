@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(:version => 20121022175323) do
     t.string   "status",           :default => "Pending"
     t.boolean  "pay",              :default => false
     t.boolean  "active",           :default => false
-    t.integer  "tax"
     t.integer  "invoice_number"
   end
 
