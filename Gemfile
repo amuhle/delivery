@@ -30,7 +30,7 @@ gem 'coffee-rails', '~> 3.2.1'
 gem 'jquery-rails'
 
 gem 'rspec-rails', :group => [:development, :test]
-gem 'haml-rails', '>= 0.3.4', :group => [:development, :test]
+gem 'haml-rails', '>= 0.3.4'
 
 group :test do
   gem 'cucumber-rails'
