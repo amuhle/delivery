@@ -37,7 +37,7 @@
         %td= order.number
         %td= order.client.nil? ? order.final_client : order.client.name
         %td= order.delivery_address
-        %td= order.due_date
+        %td= order.due_date.nil? ? '' : order.due_date.strftime('%d/%m/%Y')
         %td= order.total
         %td= order.notes
         %td= select_tag 'Status',options_for_select(@status,order.status), :class => 'span10'

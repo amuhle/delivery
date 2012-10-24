@@ -8,7 +8,7 @@
   = @order.notes
 %p
   %b Due date:
-  = @order.due_date
+  = @order.due_date.nil? ? '' : @order.due_date.strftime('%d/%m/%Y')
 %p
   %b Total:
   = @order.total
