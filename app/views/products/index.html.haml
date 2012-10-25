@@ -1,11 +1,11 @@
-%h1 Listing products
+%h1= I18n.t('products.index.title')
 
 %table.index_table.zebra.sortable
   %tr
-    %th Name
-    %th Description
-    %th Price
-    %th Tax
+    %th= I18n.t('products.index.name')
+    %th= I18n.t('products.index.description')
+    %th= I18n.t('products.index.price')
+    %th= I18n.t('products.index.tax')
     %th 
     %th 
     %th 
@@ -15,9 +15,9 @@
       %td= product.description
       %td= product.price
       %td= product.tax
-      %td= link_to 'Show', product
-      %td= link_to 'Edit', edit_product_path(product)
-      %td= link_to 'Destroy', product, :data => { :confirm => 'Are you sure?' }, :method => :delete
+      %td= link_to I18n.t('general.show'), product
+      %td= link_to I18n.t('general.edit'), edit_product_path(product)
+      %td= link_to I18n.t('general.destroy'), product, :data => { :confirm => 'Are you sure?' }, :method => :delete
 %br
 
-= link_to 'New Product', new_product_path
+= link_to I18n.t('products.index.new_product'), new_product_path

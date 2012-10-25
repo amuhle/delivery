@@ -10,13 +10,13 @@
       <div class="nav-collapse collapse">
         <% if current_user %>
         <p class="navbar-text pull-right">
-          Logged in as <a href="#" class="navbar-link"><%= current_user.email %></a>
+          <%= t 'layouts.menu.logged_in_as' %> <a href="#" class="navbar-link"><%= current_user.email %></a>
           <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
           </p>
         <ul class="nav">
-          <li class="active"><a href="/orders">Orders</a></li>
-          <li><a href="/clients">Clients</a></li>
-          <li><a href="/products">Products</a></li>
+          <li class="active"><a href="/orders"><%= t 'layouts.menu.orders' %></a></li>
+          <li><a href="/clients"><%= t 'layouts.menu.clients' %></a></li>
+          <li><a href="/products"><%= t 'layouts.menu.products' %></a></li>
         </ul>
         <% end %>
       </div><!--/.nav-collapse -->

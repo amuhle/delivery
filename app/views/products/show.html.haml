@@ -3,19 +3,19 @@
 %legend Show
 %table
   %tr
-    %th Name:
+    %th= I18n.t('products.show.name')
     %td= @product.name
   %tr
-    %th Description:
+    %th= I18n.t('products.show.description')
     %td= @product.description
   %tr
-    %th Price:
+    %th= I18n.t('products.show.price')
     %td= @product.price
   %tr
-    %th Tax:
+    %th= I18n.t('products.show.tax')
     %td= @product.tax
 %br
 
-= link_to 'Edit', edit_product_path(@product)
+= link_to I18n.t('general.edit'), edit_product_path(@product)
 \|
-= link_to 'Back', products_path
+= link_to I18n.t('general.back'), products_path

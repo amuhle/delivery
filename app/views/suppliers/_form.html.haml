@@ -7,22 +7,22 @@
           %li= msg
 
   .field
-    = f.label :name
+    = f.label :name, I18n.t('suppliers.form.name')
     = f.text_field :name
   .field
-    = f.label :phone
+    = f.label :phone, I18n.t('suppliers.form.phone')
     = f.text_field :phone
   .field
-    = f.label :email
+    = f.label :email, I18n.t('suppliers.form.email')
     = f.text_field :email
   .field
-    = f.label :address
+    = f.label :address, I18n.t('suppliers.form.address')
     = f.text_field :address
   .field
-    = f.label :rut
+    = f.label :rut, I18n.t('suppliers.form.rut')
     = f.text_field :rut
   .field
-    = f.label :contact_person
+    = f.label :contact_person, I18n.t('suppliers.form.contact_person')
     = f.text_field :contact_person
   .actions
-    = f.submit 'Save', class: "btn btn-primary"
+    = f.submit I18n.t('general.save'), class: "btn btn-primary"

@@ -1,17 +1,23 @@
-%fieldset.fieldset
-  %legend Products
-  .controls.controls-row.form-inline
-    = label_tag :name
-    = text_field_tag :product_name, '', class: 'span3', data: {'autocomplete_source' => Product.order(:name).map {|u| Hash[id: u.id, label: u.name, price: u.price]}}
-    = label_tag :price
-    .input-prepend.input-append
-      %span.add-on $
-      = text_field_tag :product_price,'', class: "input-small"
-    = label_tag :quantity
-    = text_field_tag :product_quantity, '', class: 'span1'
-    = submit_tag "Add Product",class: "btn btn-primary", id: "btn_add_product"
-    = hidden_field_tag :product_id, id: 'product_id'
+%section 
+  %header
+    %h1 
+      %small
+        Products
+  %fieldset.well.weel-small{:id => 'fieldset_products'}
+    .controls.controls-row.form-inline
+      = label_tag :name, I18n.t('orders.add_prdocut.name')
+      = text_field_tag :product_name, '', class: 'span3', data: {'autocomplete_source' => Product.order(:name).map {|u| Hash[id: u.id, label: u.name, price: u.price]}}
+      = label_tag :price, I18n.t('orders.add_prdocut.price')
+      .input-prepend.input-append
+        %span.add-on $
+        = text_field_tag :product_price,'', class: "input-small"
+      = label_tag :quantity, I18n.t('orders.add_prdocut.quantity')
+      = text_field_tag :product_quantity, '', class: 'span1'
+      = submit_tag I18n.t('orders.add_prdocut.add'),class: "btn btn-primary", id: "btn_add_product"
+      = hidden_field_tag :product_id, id: 'product_id'
 
-  %legend Added Products
+  %h2
+    %small
+      = I18n.t('orders.add_prdocut.detaill')
 
   = render 'table_products'

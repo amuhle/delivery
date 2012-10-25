@@ -7,16 +7,16 @@
           %li= msg
 
   .field
-    = f.label :name
+    = f.label :name,I18n.t('products.form.name')
     = f.text_field :name
   .field
-    = f.label :description
+    = f.label :description,I18n.t('products.form.description')
     = f.text_field :description
   .field
-    = f.label :price
+    = f.label :price,I18n.t('products.form.price')
     = f.text_field :price
   .field
-    = f.label :tax
+    = f.label :tax,I18n.t('products.form.tax')
     = f.select :tax, options_for_select(@taxs,:selected=> @product.tax)
   .actions
-    = f.submit 'Save', class: "btn btn-primary"
+    = f.submit I18n.t('general.save'), class: "btn btn-primary"

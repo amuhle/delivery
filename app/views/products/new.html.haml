@@ -1,5 +1,5 @@
-%h1 New product
+%h1= I18n.t('products.new.title')
 
 = render 'form'
 
-= link_to 'Back', products_path
+= link_to I18n.t('general.back'), products_path

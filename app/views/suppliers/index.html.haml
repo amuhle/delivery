@@ -1,13 +1,13 @@
-%h1 Listing suppliers
+%h1= I18n.t('supliers.index.title')
 
 %table.index_table.zebra.sortable
   %tr
-    %th Name
-    %th Phone
-    %th Email
-    %th Address
-    %th Rut
-    %th Contact person
+    %th= I18n.t('supliers.index.name')
+    %th= I18n.t('supliers.index.phone')
+    %th= I18n.t('supliers.index.email')
+    %th= I18n.t('supliers.index.adderss')
+    %th= I18n.t('supliers.index.rut')
+    %th= I18n.t('supliers.index.contact_person')
     %th
     %th
     %th
@@ -20,10 +20,10 @@
       %td= supplier.address
       %td= supplier.rut
       %td= supplier.contact_person
-      %td= link_to 'Show', supplier
-      %td= link_to 'Edit', edit_supplier_path(supplier)
-      %td= link_to 'Destroy', supplier, :data => { :confirm => 'Are you sure?' }, :method => :delete
+      %td= link_to  I18n.t('general.show'), supplier
+      %td= link_to  I18n.t('general.edit')', edit_supplier_path(supplier)
+      %td= link_to  I18n.t('general.destroy'), supplier, :data => { :confirm => 'Are you sure?' }, :method => :delete
 
 %br
 
-= link_to 'New Supplier', new_supplier_path
+= link_to  I18n.t('supliers.index.new_supplier'), new_supplier_path

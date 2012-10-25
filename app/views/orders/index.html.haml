@@ -1,66 +1,68 @@
 %section
   %header
-    %h1 Listing orders
-  %fieldset.fieldset
+    %h1= I18n.t('orders.index.title')
+  %fieldset.well.well-small
     = search_form_for @q, :url => search_orders_path, :html => {:method => :post} do |f|
       .content{:id => 'content_order_search'}
-        = f.label :client_name, :class => 'control-label'
+        = label_tag :client_name, I18n.t('orders.index.client_name')
         = text_field_tag :client_name, @client.name , :id => 'search_client_name' ,data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name]}}
-        = label_tag :between_date, 'Between dates', :class => 'control-label'
+        = label_tag :final_client, I18n.t('orders.index.final_client')
+        = search_field(:order, :final_client,:onsearch => true, value: (params['q']['order_final_client'] unless params['q'].nil?))
+        = label_tag :between_date, I18n.t('orders.index.between_date')
         = f.text_field :due_date_gt, value: (params['q']['due_date_gt'] unless params['q'].nil?),:class => 'input-small'
         = f.text_field :due_date_lt, value: (params['q']['due_date_lt'] unless params['q'].nil?), :class => 'input-small'
-        = f.label :pay, 'Pay', :class => 'control-label'
+        = f.label :pay, I18n.t('orders.index.pay')
         = f.select :pay_eq, options_for_select([['No',false],['Yes',true]], (params['q']['pay_eq'] unless params['q'].nil?)),:include_blank => true
-        = f.label :active, 'Active', :class => 'control-label'
+        = f.label :active, I18n.t('orders.index.active'), :class => 'control-label'
         = f.select :active_eq, options_for_select([['No',false],['Yes',true]], (params['q']['active_eq'] unless params['q'].nil?)),:include_blank => true 
-        = f.label :status,'Status', :class => 'control-label'
+        = f.label :status,I18n.t('orders.index.status')
         = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),:include_blank => true
       = hidden_field_tag :id_client, @client.id
-      = submit_tag 'Search', :class => 'btn btn-primary offset10'
+      = submit_tag I18n.t('general.search'), :class => 'btn btn-primary offset10'
 
 %table.index_table.sortable{ :id => 'tableOrders'}
   %tr
-    %th Number
-    %th Client
-    %th Delivery address
-    %th Due date
+    %th= I18n.t('orders.index.number')
+    %th= I18n.t('orders.index.client')
+    %th= I18n.t('orders.index.delivery_address')
+    %th= I18n.t('orders.index.due_date')
     %th Total
-    %th Notes
-    %th Status
-    %th
-    %th
-    %th
+    %th= I18n.t('orders.index.notes')
+    %th= I18n.t('orders.index.status')
+    %th= I18n.t('orders.index.pay')
+    %th= I18n.t('orders.index.active')
+    %th= I18n.t('orders.index.options')
 
     - @orders.each do |order|
       %tr{ :id => order.id , :class => order.status }
         %td= order.number
         %td= order.client.nil? ? order.final_client : order.client.name
         %td= order.delivery_address
-        %td= order.due_date.nil? ? '' : order.due_date.strftime('%d/%m/%Y')
+        %td= l order.due_date, :format => :short if order.due_date
         %td= order.total
         %td= order.notes
         %td= select_tag 'Status',options_for_select(@status,order.status), :class => 'span10'
         - unless order.pay
           %td
             .btn-group
-              = link_to('Pay',pay_order_path(order.id),class: 'btn btn-mini')
-              = link_to('Unpayed','#',class: 'btn btn-mini disabled')
+              = link_to(I18n.t('orders.index.pay'),pay_order_path(order.id),class: 'btn btn-mini')
+              = link_to(I18n.t('orders.index.unpaid'),'#',class: 'btn btn-mini disabled')
         - else
           %td
             .btn-group
-              = link_to('Pay','#', class:'btn btn-mini disabled')
-              = link_to('Unpayed',pay_order_path(order.id),class: 'btn btn-mini')
+              = link_to(I18n.t('orders.index.pay'),'#', class:'btn btn-mini disabled')
+              = link_to(I18n.t('orders.index.unpaid'),pay_order_path(order.id),class: 'btn btn-mini')
         - unless order.active
           %td
             .btn-group
-              = link_to('Active',active_order_path(order.id),class: 'btn btn-mini')
-              = link_to('Disable','#',class: 'btn btn-mini disabled')
+              = link_to(I18n.t('orders.index.active'),active_order_path(order.id),class: 'btn btn-mini')
+              = link_to(I18n.t('orders.index.disabled'),'#',class: 'btn btn-mini disabled')
         - else
           %td
             .btn-group
-              = link_to('Active','#', class:'btn btn-mini disabled')
-              = link_to('Disable',active_order_path(order.id),class: 'btn btn-mini')
-        %td= link_to 'Show', order
+              = link_to(I18n.t('orders.index.active'),'#', class:'btn btn-mini disabled')
+              = link_to(I18n.t('orders.index.disabled'),active_order_path(order.id),class: 'btn btn-mini')
+        %td= link_to I18n.t('orders.index.show'), order
 
-  %footer
-    = link_to 'New Order', new_order_path
+= link_to I18n.t('orders.index.new_order'), new_order_path
+

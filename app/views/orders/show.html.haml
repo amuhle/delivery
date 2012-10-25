@@ -4,42 +4,42 @@
   %div.panel
     %div.panel_contents
       %div.attributes_table{"id" => "attributes_table"}
-        %legend Show
+        %legend= t 'general.show'
         %table
           %tr
-            %th Number:
+            %th= t 'orders.view.number'
             %td= @order.number
           %tr
-            %th Notes:
+            %th= t 'orders.view.notes'
             %td= @order.notes
           %tr
-            %th Due date:
-            %td= @order.due_date
+            %th= t 'orders.view.due_date'
+            %td= l @order.due_date, :format => :long if @order.due_date
           %tr
             %th Total:
             %td= @order.total
           %tr
-            %th Client:
+            %th= t 'orders.view.client'
             %td= @order.client.name if @order.client
           %tr
-            %th User:
+            %th= t 'orders.view.user'
             %td= @order.user.email if @order.user
           %tr
-            %th Delivery address:
+            %th= t 'orders.view.delivery_address'
             %td= @order.delivery_address
           %tr
-            %th Final client:
+            %th= t 'orders.view.final_client'
             %td= @order.final_client
 
 %br
 
-%legend Products  
+%legend= t 'orders.view.products'
 %table.index_table.zebra.sortable{ id: 'tableProducts', class: 'table-striped'}
   %tbody 
     %tr
-      %th{ class: 'span2'} Name
-      %th{ class: 'span2'} Quantity
-      %th{ class: 'span2'} Price
+      %th{ class: 'span2'}= t 'orders.view.name'
+      %th{ class: 'span2'}= t 'orders.view.quantity'
+      %th{ class: 'span2'}= t 'orders.view.price'
       %th{ calss: 'spna2'} Subtotal
       - if !@order.blank? && !@order.product_orders.blank?  
         - @order.product_orders.each do |p|
@@ -49,6 +49,5 @@
             %td= p.price 
             %td= p.price * p.quantity
 
-= link_to 'Edit', edit_order_path(@order)
-\|
-= link_to 'Back', orders_path
+
+= link_to I18n.t('general.back'), orders_path

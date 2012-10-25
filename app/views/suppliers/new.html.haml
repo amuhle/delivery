@@ -1,5 +1,5 @@
-%h1 New supplier
+%h1= I18n.t('suppliers.new.title')
 
 = render 'form'
 
-= link_to 'Back', suppliers_path
+= link_to I18n.t('general.back'), suppliers_path
