@@ -6,8 +6,8 @@ class OrdersController < ApplicationController
     @orders = Order.last_twenty
     @q = Order.search(params[:q])
     @client = Client.new
-    
-    @status = Order::STATUS 
+
+    @status = Order::STATUS
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @orders }

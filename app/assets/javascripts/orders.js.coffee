@@ -15,7 +15,21 @@ jQuery ->
       $("#product_quantity").val('1')
       $("#product_id").val(ui.item.id)
       $("#product_name").focus()
-  
+    
+  $('#search_client_name').autocomplete
+    source: $('#search_client_name').data('autocomplete-source') 
+    select: (event,ui) ->
+      $('#id_client').val(ui.item.id)
+      $('#order_delivery_address').val(ui.item.address)
+
+  $('#index_search_client_name').autocomplete
+    source: $('#index_search_client_name').data('autocomplete-source') 
+    select: (event,ui) ->
+      $('#client_id_eq').val(ui.item.id)
+
+  $('#q_final_client_eq').autocomplete
+    source: $('#q_final_client_eq').data('autocomplete-source')
+
   updateTotal = (total) ->
     $('#total').fadeOut()
     $('#total').text(total.toString())
@@ -175,12 +189,6 @@ jQuery ->
     $('#phone_client_name').attr('style','display:none')
   
   $("#option_final_client").click showFinalClient
-
-  $('#search_client_name').autocomplete
-    source: $('#search_client_name').data('autocomplete-source') 
-    select: (event,ui) ->
-      $('#id_client').val(ui.item.id)
-      $('#order_delivery_address').val(ui.item.address)
 
   searchClient = (event) ->
     event.preventDefault()

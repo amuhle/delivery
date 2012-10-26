@@ -4,20 +4,26 @@
   %fieldset.well.well-small
     = search_form_for @q, :url => search_orders_path, :html => {:method => :post} do |f|
       .content{:id => 'content_order_search'}
-        = label_tag :client_name, I18n.t('orders.index.client_name')
-        = text_field_tag :client_name, @client.name , :id => 'search_client_name' ,data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name]}}
-        = label_tag :final_client, I18n.t('orders.index.final_client')
-        = search_field(:order, :final_client,:onsearch => true, value: (params['q']['order_final_client'] unless params['q'].nil?))
-        = label_tag :between_date, I18n.t('orders.index.between_date')
-        = f.text_field :due_date_gt, value: (params['q']['due_date_gt'] unless params['q'].nil?),:class => 'input-small'
-        = f.text_field :due_date_lt, value: (params['q']['due_date_lt'] unless params['q'].nil?), :class => 'input-small'
-        = f.label :pay, I18n.t('orders.index.pay')
-        = f.select :pay_eq, options_for_select([['No',false],['Yes',true]], (params['q']['pay_eq'] unless params['q'].nil?)),:include_blank => true
-        = f.label :active, I18n.t('orders.index.active'), :class => 'control-label'
-        = f.select :active_eq, options_for_select([['No',false],['Yes',true]], (params['q']['active_eq'] unless params['q'].nil?)),:include_blank => true 
-        = f.label :status,I18n.t('orders.index.status')
-        = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),:include_blank => true
-      = hidden_field_tag :id_client, @client.id
+        .field
+          = label_tag :client_name, I18n.t('orders.index.client_name')
+          = text_field_tag :client_name,@client.name ,:id => 'index_search_client_name', data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name]}}
+          = f.hidden_field :client_id_eq, :id => 'client_id_eq'
+        .field
+          = f.label :final_client_eq, I18n.t('orders.index.final_client')
+          = f.text_field :final_client_eq, data: {'autocomplete_source' => Order.order(:final_client).map {|u| Hash[id: u.id, label: u.final_client]}}
+        .field
+          = f.label :between_date, I18n.t('orders.index.between_date')
+          = f.text_field :due_date_gt, value: (params['q']['due_date_gt'] unless params['q'].nil?),:class => 'input-small'
+          = f.text_field :due_date_lt, value: (params['q']['due_date_lt'] unless params['q'].nil?), :class => 'input-small'
+        .field
+          = f.label :pay, I18n.t('orders.index.pay')
+          = f.select :pay_eq, options_for_select([['No',false],['Yes',true]], (params['q']['pay_eq'] unless params['q'].nil?)),:include_blank => true
+        .field
+          = f.label :active, I18n.t('orders.index.active'), :class => 'control-label'
+          = f.select :active_eq, options_for_select([['No',false],['Yes',true]], (params['q']['active_eq'] unless params['q'].nil?)),:include_blank => true 
+        .field
+          = f.label :status,I18n.t('orders.index.status')
+          = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),:include_blank => true
       = submit_tag I18n.t('general.search'), :class => 'btn btn-primary offset10'
 
 %table.index_table.sortable{ :id => 'tableOrders'}
