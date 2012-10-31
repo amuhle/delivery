@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+before_filter :authenticate_user!
 
   # GET /orders
   # GET /orders.json
@@ -147,7 +148,7 @@ class OrdersController < ApplicationController
     @order.pay = !@order.pay
     if @order.save
       respond_to do |format|
-        format.html { redirect_to action: 'index' }
+        format.json { render json: @order.to_json(only: [:id,:pay]) }
       end
     end
   end
@@ -157,25 +158,9 @@ class OrdersController < ApplicationController
     @order.active = !@order.active
     if @order.save
       respond_to do |format|
-        format.html { redirect_to action: 'index' }
+        format.json { render json: @order.to_json(only: [:id,:active]) }
       end
     end
-  end
-
-private
-
-  def to_boolean(value)
-    return true if value == "true"
-    return false if value == "false"
-  end
-
-  def date_to_datetime(date_aux)
-    date = date_aux.split("/")
-    day = date[1].to_i
-    month = date[0].to_i
-    year = date[2].to_i
-    start_date = DateTime.new(year,month,day)
-    return start_date
   end
 
 end

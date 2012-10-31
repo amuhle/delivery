@@ -231,5 +231,44 @@ jQuery ->
           
   $('table#tableOrders').on("change","tr #Status",changeStatusFromOrder)
 
+  pay_order = ->
+    selected_row = (($(this).parent()).parent()).parent()
+    id = selected_row.attr('id')
+    $.ajax
+      type: 'put'
+      url: "orders/#{id}/pay"
+      data: {id: id}
+      datatype: 'json'
+      success:(json) ->
+        val_a = $(".pay",$("##{json.id}"))
+        if json.pay
+          val_a[0].classList.add("disabled")
+          val_a[1].classList.remove("disabled")
+        else
+          val_a[1].classList.add("disabled")
+          val_a[0].classList.remove("disabled")
+        alert("Se ha cambiado la orden correctamente")
+
+  $('table#tableOrders').on("click","a.pay",pay_order)
+
+  active_order = ->
+    selected_row = (($(this).parent()).parent()).parent()
+    id = selected_row.attr('id')
+    $.ajax
+      type: 'put'
+      url: "orders/#{id}/active"
+      data: {id: id}
+      datatype: 'json'
+      success:(json) ->
+        val_a = $(".active",$("##{json.id}"))
+        if json.active
+          val_a[0].classList.add("disabled")
+          val_a[1].classList.remove("disabled")
+        else
+          val_a[1].classList.add("disabled")
+          val_a[0].classList.remove("disabled")
+        alert("Se ha cambiado la orden correctamente")
+
+  $('table#tableOrders').on("click","a.active",active_order)
 
 

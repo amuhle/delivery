@@ -1,12 +1,12 @@
-<h2><%= t ('devise.confirmation.new.title')%></h2>
+<h2>Resend confirmation instructions</h2>
 
 <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email, I18n.t('devise.confirmation.new.email') %><br />
+  <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
-  <div><%= f.submit I18n.t('devise.confirmation.new.title') %></div>
+  <div><%= f.submit "Resend confirmation instructions" %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>

@@ -23,8 +23,9 @@
           = f.select :active_eq, options_for_select([['No',false],['Yes',true]], (params['q']['active_eq'] unless params['q'].nil?)),:include_blank => true 
         .field
           = f.label :status,I18n.t('orders.index.status')
-          = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),:include_blank => true
-      = submit_tag I18n.t('general.search'), :class => 'btn btn-primary offset10'
+          .controls.form-inline
+            = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),:include_blank => true
+            = submit_tag I18n.t('general.search'), :class => 'btn btn-primary offset5'
 
 %table.index_table.sortable{ :id => 'tableOrders'}
   %tr
@@ -48,26 +49,17 @@
         %td= order.total
         %td= order.notes
         %td= select_tag 'Status',options_for_select(@status,order.status), :class => 'span10'
-        - unless order.pay
-          %td
-            .btn-group
-              = link_to(I18n.t('orders.index.pay'),pay_order_path(order.id),class: 'btn btn-mini')
-              = link_to(I18n.t('orders.index.unpaid'),'#',class: 'btn btn-mini disabled')
-        - else
-          %td
-            .btn-group
-              = link_to(I18n.t('orders.index.pay'),'#', class:'btn btn-mini disabled')
-              = link_to(I18n.t('orders.index.unpaid'),pay_order_path(order.id),class: 'btn btn-mini')
-        - unless order.active
-          %td
-            .btn-group
-              = link_to(I18n.t('orders.index.active'),active_order_path(order.id),class: 'btn btn-mini')
-              = link_to(I18n.t('orders.index.disabled'),'#',class: 'btn btn-mini disabled')
-        - else
-          %td
-            .btn-group
-              = link_to(I18n.t('orders.index.active'),'#', class:'btn btn-mini disabled')
-              = link_to(I18n.t('orders.index.disabled'),active_order_path(order.id),class: 'btn btn-mini')
+        - paid = true if order.pay
+        - disabled = 'disabled'
+        %td
+          .btn-group
+            = link_to(I18n.t('orders.index.pay'),'#',class: "pay btn btn-mini #{disabled if paid}")
+            = link_to(I18n.t('orders.index.unpaid'),'#',class: "pay btn btn-mini #{disabled unless paid}")
+        - active = true if order.active
+        %td
+          .btn-group
+            = link_to(I18n.t('orders.index.active'),'#',class: "active btn btn-mini #{disabled if active}")
+            = link_to(I18n.t('orders.index.disabled'),'#',class: "active btn btn-mini #{disabled unless active}")
         %td= link_to I18n.t('orders.index.show'), order
 
 = link_to I18n.t('orders.index.new_order'), new_order_path

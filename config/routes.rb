@@ -1,22 +1,27 @@
 Delivery::Application.routes.draw do
 
+  devise_for :admins, :controllers => { :sessions => "sessions"}
+
   resources :orders do 
     post :new_client, on: :collection
     put :update_status, on: :collection 
     post :search, on: :collection, as: :search
-    get :pay, on: :member, as: :pay
-    get :active, on: :member, as: :active
+    put :pay, on: :member, as: :pay
+    put :active, on: :member, as: :active
   end
 
   resources :suppliers
 
   resources :products
 
-  devise_for :users, :controllers => { :sessions => "sessions" , :registrations => "registrations"}
+  devise_for :users, :skip => "registrations",:controllers => { :sessions => "sessions" }
+  
+  resources :users
 
   resources :clients do
     get :get_by_phone, on: :collection
   end
+
 
 
   # The priority is based upon order of creation:

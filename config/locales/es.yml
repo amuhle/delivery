@@ -118,97 +118,13 @@ es:
       address: 'Dirección'
       phone: 'Teléfono'
 
-  devise:
-
-    confirmations:
-
-      new:
-        title: 'Reenviar instrucciones de confirmación'
-        email: 'Email:'
-
-    mailer:
-
-      confirmation:
-        welcome: 'Bienvenido'
-        mesagge: 'Usted puede confirmar su cuenta de correo electrónico a través del siguiente enlace:'
-        confirm: 'Confirmar mi cuenta'
-
-      reset:
-        hello: 'Hola'
-        mesagge: 'Usted ha pedido un enlace para cambiar su contraseña, y puede hacerlo a través del siguiente enlace.'
-        footer: 'Si no has solicitado esto, por favor ignore este mensaje.'
-        footer2: 'Su contraseña no cambiará hasta que acceda al enlace anterior y crear uno nuevo.'
-        change_password: 'Cambiar mi contraseña'
-
-      unlock:
-        hello: 'Hola'
-        mesagge: 'Su cuenta ha sido bloqueada debido a un exceso de intentos fracasados de ingreso'
-        message2: 'Haga clic en el enlace de abajo para desbloquear su cuenta:'
-        unlock: 'Desbloquear mi cuenta'
-
-    passwords:
-
-      edit:
-        title: 'Cambiar su contraseña'
-        new: 'Nueva contraseña'
-        confirm: 'Confirmar su contraseña'
-        change: 'Cambiar mi contraseña'
-
-      new:
-        title: 'Olvido su contraseña?'
-        email: 'Email'
-        send: 'Enviarme instrucciones de restablecimiento de contraseña'
-
-    registrations:
-
-      edit:
-        email: 'Email'
-        password: 'Contraseña'
-        password_confirm: 'Confirmación de contraseña'
-        message2: '(dejar en blanco si no quieres cambiarlo)'
-        message: '(necesitamos tu contraseña actual para confirmar los cambios)'
-        cancel: 'Cancelar mi cuenta'
-        unhappy: 'Descontento?'
-        cancel_acount: 'Cancelar mi cuenta'
-
-      new:
-        title: 'Registro'
-        email: 'Email'
-        password: 'Contraseña'
-        password_confirm: 'Confirmación de contraseña'
-        supplier: 'Proveedor'
-        register: 'Registrar'
-
-    sessions:
-
-      new:
-        title: 'Inicio'
-        email: 'Email'
-        password: 'Contraseña'
-        remember_me: 'Recordarme?'
-        sig_up: 'Acceder'
-
-    shared:
-
-      links:
-        forgot: 'Olvido su contraseña?'
-        confirmation: 'No ha recibido instrucciones de confirmación?'
-        unlock: 'No se ha recibido instrucciones de desbloqueo?'
-        sign_with: "Acceder con #{provider}"
-
-    unlock:
-
-      new:
-        title: 'Reenvio de instrucciones de desbloqueo'
-        email: 'Email'
-        resend: 'Reenviar instucciones'
-
   layouts:
 
     menu:
       orders: 'Ordenes'
       clients: 'Clientes'
       products: 'Productos'
+      users: 'Usuarios'
       logged_in_as: 'Conectado con '
 
   products:
@@ -237,7 +153,7 @@ es:
       description: 'Description'
       price: 'Price'
       tax: 'Impuesto'
-      new_product: 'Ingreso de Producto'
+      new_product: 'Ingresar Producto'
 
   supplier:
 
@@ -272,8 +188,40 @@ es:
       email: 'Email'
       address: 'Dirección'
       phone: 'Teléfono'
-      new_suplier: 'Ingreso de Proveedor'
+      new_suplier: 'Ingresar Proveedor'
+  
+  users:
 
+    form:
+      email: 'Email'
+      password: 'Contaseña'
+      password_confirm: 'Confirmación de Contaseña'
+      suppliers: 'Proveedores'
+    
+    new:
+      title: 'Ingreso de Usuario'
+
+    edit:
+      title: 'Modificación de Usuario'
+
+    show:
+      title: 'Visualización'
+      email: 'Email:'
+      sign_in_count: 'Cantidad de ingresos:'
+      last_sign_in_at: 'Último ingreso:'
+      created_at: 'Creado el:'
+      updated_at: 'Modificado el:'
+      supplier: 'Proveedor:'
+
+    index:
+      title: 'Usuarios'
+      email: 'Email'
+      created_at: 'Creado el'
+      updated_at: 'Modificado el'
+      new_user: 'Ingresar Usuario'
+      last_sing_in: 'Último ingreso'
+      sing_in_count: 'Cantidad de ingresos'
+      supplier: 'Proveedor'
 
   date:
     abbr_day_names:
