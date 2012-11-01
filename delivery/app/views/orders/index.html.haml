@@ -1,0 +1,64 @@
+%h1= I18n.t('orders.index.title')
+%fieldset.well.well-small
+  = search_form_for @q, :url => search_orders_path, :html => {:method => :post} do |f|
+    .content{:id => 'content_order_search'}
+      .field
+        = label_tag :client_name, I18n.t('orders.index.client_name')
+        = text_field_tag :client_name,@client.name ,:id => 'index_search_client_name', data: {'autocomplete_source' => Client.order(:name).map {|u| Hash[id: u.id, label: u.name]}}
+        = f.hidden_field :client_id_eq, :id => 'client_id_eq'
+      .field
+        = f.label :final_client_eq, I18n.t('orders.index.final_client')
+        = f.text_field :final_client_eq, data: {'autocomplete_source' => Order.order(:final_client).map {|u| Hash[id: u.id, label: u.final_client]}}
+      .field
+        = f.label :between_date, I18n.t('orders.index.between_date')
+        = f.text_field :due_date_gt, value: (params['q']['due_date_gt'] unless params['q'].nil?),:class => 'input-small'
+        = f.text_field :due_date_lt, value: (params['q']['due_date_lt'] unless params['q'].nil?), :class => 'input-small'
+      .field
+        = f.label :pay, I18n.t('orders.index.pay')
+        = f.select :pay_eq, options_for_select([[I18n.t('general.no'),false],[I18n.t('general.yes'),true]], (params['q']['pay_eq'] unless params['q'].nil?)),:include_blank => true
+      .field
+        = f.label :active, I18n.t('orders.index.active'), :class => 'control-label'
+        = f.select :active_eq, options_for_select([[I18n.t('general.no'),false],[I18n.t('general.yes'),true]], (params['q']['active_eq'] unless params['q'].nil?)),:include_blank => true 
+      .field
+        = f.label :status,I18n.t('orders.index.status')
+        .controls.form-inline
+          = f.select :status_eq, options_for_select(@status, (params[:q][:status_eq] unless params['q'].nil?)),:include_blank => true
+          = submit_tag I18n.t('general.search'), :class => 'btn btn-primary offset5'
+
+%table.index_table.sortable{ :id => 'tableOrders'}
+  %tr
+    %th= I18n.t('orders.index.number')
+    %th= I18n.t('orders.index.client')
+    %th= I18n.t('orders.index.delivery_address')
+    %th= I18n.t('orders.index.due_date')
+    %th Total
+    %th= I18n.t('orders.index.notes')
+    %th= I18n.t('orders.index.status')
+    %th= I18n.t('orders.index.pay')
+    %th= I18n.t('orders.index.active')
+    %th= I18n.t('orders.index.options')
+
+    - @orders.each do |order|
+      %tr{ :id => order.id , :class => order.status }
+        %td= order.number
+        %td= order.client.nil? ? order.final_client : order.client.name
+        %td= order.delivery_address
+        %td= l order.due_date, :format => :short if order.due_date
+        %td= order.total
+        %td= order.notes
+        %td= select_tag 'Status',options_for_select(@status,order.status), :class => 'span10'
+        - paid = true if order.pay
+        - disabled = 'disabled'
+        %td
+          .btn-group
+            = link_to(I18n.t('orders.index.pay'),'#',class: "pay btn btn-mini #{disabled if paid}")
+            = link_to(I18n.t('orders.index.unpaid'),'#',class: "pay btn btn-mini #{disabled unless paid}")
+        - active = true if order.active
+        %td
+          .btn-group
+            = link_to(I18n.t('orders.index.active'),'#',class: "active btn btn-mini #{disabled if active}")
+            = link_to(I18n.t('orders.index.disabled'),'#',class: "active btn btn-mini #{disabled unless active}")
+        %td= link_to I18n.t('orders.index.show'), order
+
+= link_to I18n.t('orders.index.new_order'), new_order_path
+
