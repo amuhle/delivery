@@ -1,0 +1,7 @@
+%h1= I18n.t('products.edit.title')
+
+= render 'form'
+
+= link_to I18n.t('general.show'), @product
+\|
+= link_to I18n.t('general.back'), products_path

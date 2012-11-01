@@ -1,0 +1,53 @@
+%p#notice= notice
+
+%div.main_content
+  %div.panel
+    %div.panel_contents
+      %div.attributes_table{"id" => "attributes_table"}
+        %legend= t 'general.show'
+        %table
+          %tr
+            %th= t 'orders.view.number'
+            %td= @order.number
+          %tr
+            %th= t 'orders.view.notes'
+            %td= @order.notes
+          %tr
+            %th= t 'orders.view.due_date'
+            %td= l @order.due_date, :format => :long if @order.due_date
+          %tr
+            %th Total:
+            %td= @order.total
+          %tr
+            %th= t 'orders.view.client'
+            %td= @order.client.name if @order.client
+          %tr
+            %th= t 'orders.view.user'
+            %td= @order.user.email if @order.user
+          %tr
+            %th= t 'orders.view.delivery_address'
+            %td= @order.delivery_address
+          %tr
+            %th= t 'orders.view.final_client'
+            %td= @order.final_client
+
+%br
+
+%legend= t 'orders.view.products'
+%table.index_table.zebra.sortable{ id: 'tableProducts', class: 'table-striped'}
+  %tbody 
+    %tr
+      %th{ class: 'span2'}= t 'orders.view.name'
+      %th{ class: 'span2'}= t 'orders.view.quantity'
+      %th{ class: 'span2'}= t 'orders.view.price'
+      %th{ calss: 'spna2'} Subtotal
+      - if !@order.blank? && !@order.product_orders.blank?  
+        - @order.product_orders.each do |p|
+          %tr{ id:p.product.id} 
+            %td= p.product.name
+            %td= p.quantity
+            %td= p.price 
+            %td= p.price * p.quantity
+
+
+= link_to I18n.t('general.back'), orders_path
