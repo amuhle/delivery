@@ -1,0 +1,7 @@
+%h1= I18n.t('suppliers.edit.title')
+
+= render 'form'
+
+= link_to I18n.t('general.show'), @supplier
+\|
+= link_to I18n.t('general.back'), suppliers_path
