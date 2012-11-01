@@ -1,0 +1,7 @@
+%h1= t 'clients.edit.title'
+
+= render 'form'
+
+= link_to I18n.t('general.show'), @client
+\|
+= link_to I18n.t('general.back'), clients_path
