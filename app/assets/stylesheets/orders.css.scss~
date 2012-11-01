@@ -23,36 +23,3 @@ ul.ui-autocomplete {
     }
   }
 }
-
-.Deliverd{
-  background-color: #dff0d8;
-}
-
-.Delayed{
-  background-color: #f2dede;
-}
-
-#content_order_search{
-  column-count: 3;
-  -webkit-column-count: 3;
-  -moz-column-count: 3;
-  -o-column-count: 3;
-  column-gap: 2em;
-  -webkit-column-gap: 2em;
-  -moz-column-gap: 2em;
-  -o-column-gap: 2em;
-  select{
-    width: 100px;
-  }
-  #q_due_date_gt{
-    margin-right: 10px;
-  }
-}
-
-#fieldset_products{
-
-  label,#product_name,#product_quantity{
-  margin: 0 10px 0 10px;
-  }
-
-}
