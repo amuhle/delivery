@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%legend= t 'clients.show.title'
+%table
+  %tr
+    %th= t 'clients.show.name'
+    %td= @client.name
+  %tr
+    %th= t 'clients.show.rut'
+    %td= @client.rut
+  %tr
+    %th= t 'clients.show.contact'
+    %td= @client.contact
+  %tr
+    %th= t 'clients.show.email'
+    %td= @client.email
+  %tr
+    %th= t 'clients.show.address'
+    %td= @client.address
+  %tr
+    %th= t 'clients.show.phone'
+    %td= @client.phone
+%br
+
+= link_to I18n.t('general.edit'), edit_client_path(@client)
+\|
+= link_to I18n.t('general.back'), clients_path

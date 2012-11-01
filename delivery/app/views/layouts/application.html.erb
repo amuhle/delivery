@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render :partial => "layouts/head" %>
+</head>
+<body>
+  <%= render "layouts/menu" %>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span10">
+        <%= yield %>
+      </div>
+    </div>
+    <hr>
+    <%= render :partial => "layouts/footer" %>
+  </div><!--/.fluid-container-->
+</body>
+</html>
