@@ -1,0 +1,14 @@
+%nav
+  %ul.nav
+    - if current_user
+      %li.active
+        = link_to I18n.t('layouts.menu.orders'), orders_path()
+    - else
+      %li.active
+        = link_to I18n.t('layouts.menu.users'), users_path()
+      %li
+        = link_to I18n.t('layouts.menu.orders'), orders_path()
+    %li
+      = link_to I18n.t('layouts.menu.clients'), clients_path()
+    %li
+      = link_to I18n.t('layouts.menu.products'),products_path()
