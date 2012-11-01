@@ -1,0 +1,28 @@
+= form_for @client do |f|
+  -if @client.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@client.errors.count, "error")} prohibited this client from being saved:"
+      %ul
+        - @client.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name, I18n.t('clients.form.name')
+    = f.text_field :name
+  .field
+    = f.label :rut, I18n.t('clients.form.rut')
+    = f.text_field :rut
+  .field
+    = f.label :contact, I18n.t('clients.form.contact')
+    = f.text_field :contact
+  .field
+    = f.label :email, I18n.t('clients.form.email')
+    = f.text_field :email
+  .field
+    = f.label :address, I18n.t('clients.form.address')
+    = f.text_field :address
+  .field
+    = f.label :phone, I18n.t('clients.form.phone')
+    = f.text_field :phone
+  .actions
+    = f.submit I18n.t('general.save'), class: "btn btn-primary"
