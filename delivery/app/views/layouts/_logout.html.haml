@@ -1,0 +1,11 @@
+.nav-collapse.collapse
+  %p.navbar-text.pull-right
+    %b= t 'layouts.menu.logged_in_as'
+    %a.navbar-link
+    - if current_user
+      = current_user.email
+      = link_to('Logout', destroy_user_session_path, :method => :delete)
+    - if current_admin
+      = current_admin.email
+      = link_to('Logout', destroy_admin_session_path, :method => :delete)
+
