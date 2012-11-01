@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%legend= I18n.t('suppleir.show.title')
+%table
+  %tr
+    %th= I18n.t('suppleir.show.name')
+    %td= @supplier.name
+  %tr 
+    %th= I18n.t('suppleir.show.phone')
+    %td= @supplier.phone
+  %tr
+    %th= I18n.t('suppleir.show.email')
+    %td= @supplier.email
+  %tr
+    %th= I18n.t('suppleir.show.address')
+    %td= @supplier.address
+  %tr
+    %th= I18n.t('suppleir.show.rut')
+    %td= @supplier.rut
+  %tr
+    %th= I18n.t('suppleir.show.contact_person')
+    %td= @supplier.contact_person
+%br
+
+= link_to I18n.t('general.edit'), edit_supplier_path(@supplier)
+\|
+= link_to I18n.t('general.back'), suppliers_path

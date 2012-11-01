@@ -1,0 +1,29 @@
+%h1= I18n.t('users.index.title')
+
+%table.index_table.zebra.sortable
+  %tr
+    %th= I18n.t('users.index.email')
+    %th= I18n.t('users.index.created_at')
+    %th= I18n.t('users.index.updated_at')
+    %th= I18n.t('users.index.last_sing_in')
+    %th= I18n.t('users.index.sing_in_count')
+    %th= I18n.t('users.index.supplier')
+    %th
+
+  - @users.each do |user|
+    %tr
+      %td= user.email
+      %td= l user.created_at, :format => :short if user.created_at
+      %td= l user.updated_at, :format => :short if user.updated_at
+      %td= l user.last_sign_in_at, :format => :short if user.last_sign_in_at
+      %td= user.sign_in_count
+      %td= user.supplier.name if user.supplier
+      %td
+        .btn-group
+          = link_to I18n.t('general.show'), user, :class => "btn btn-mini"
+          = link_to I18n.t('general.edit'), edit_user_path(user),:class => "btn btn-mini"
+          = link_to I18n.t('general.destroy'), user, :confirm => 'Are you sure?', :method => :delete,:class => "btn btn-mini btn-danger"
+
+%br
+
+= link_to I18n.t('users.index.new_user'), new_user_path

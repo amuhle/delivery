@@ -1,0 +1,28 @@
+= form_for @supplier do |f|
+  -if @supplier.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@supplier.errors.count, "error")} prohibited this supplier from being saved:"
+      %ul
+        - @supplier.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name, I18n.t('suppliers.form.name')
+    = f.text_field :name
+  .field
+    = f.label :phone, I18n.t('suppliers.form.phone')
+    = f.text_field :phone
+  .field
+    = f.label :email, I18n.t('suppliers.form.email')
+    = f.text_field :email
+  .field
+    = f.label :address, I18n.t('suppliers.form.address')
+    = f.text_field :address
+  .field
+    = f.label :rut, I18n.t('suppliers.form.rut')
+    = f.text_field :rut
+  .field
+    = f.label :contact_person, I18n.t('suppliers.form.contact_person')
+    = f.text_field :contact_person
+  .actions
+    = f.submit I18n.t('general.save'), class: "btn btn-primary"
