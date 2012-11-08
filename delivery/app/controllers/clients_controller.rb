@@ -1,10 +1,11 @@
 class ClientsController < ApplicationController
-  before_filter [:authenticate_user!,:authenticate_admin!]
+  before_filter :authenticate_users
+
   # GET /clients
   # GET /clients.json
   def index
     @clients
-
+    
     if current_user
       @clients = current_user.supplier.clients 
     else

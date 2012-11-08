@@ -1,0 +1,52 @@
+%legend.legend= I18n.t('admin.registrations.new.title') 
+
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
+  = devise_error_messages! ##unless resource.nil?
+  
+  - if @purchase.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@purchase.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @purchase.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .controls
+      = f.email_field :email
+  .control-group
+    = f.label :password, I18n.t('admin.registrations.new.password'), :class => 'control-label'
+    .controls
+      = f.password_field :password
+  .control-group
+    = f.label :password_confirmation, I18n.t('admin.registrations.new.password_confirm'), :class => 'control-label'
+    .controls
+      = f.password_field :password_confirmation
+
+  = fields_for :purchase do |p|
+    .control-group
+      = p.label :first_name,I18n.t('purchase.form.first_name'), :class => 'control-label'
+      .controls
+        = p.text_field :first_name, :class => 'text_field'
+    .control-group
+      = p.label :last_name,I18n.t('purchase.form.last_name'), :class => 'control-label'
+      .controls
+        = p.text_field :last_name, :class => 'text_field'
+    .control-group
+      = p.label :card_number,I18n.t('purchase.form.card_number'), :class => 'control-label'
+      .controls
+        = p.number_field :card_number, :class => 'number_field'
+    .control-group
+      = p.label :card_verification,I18n.t('purchase.form.card_verification_value'), :class => 'control-label'
+      .controls
+        = p.text_field :card_verification, :class => 'text_field'
+    .control-group
+      = p.label :card_type,I18n.t('purchase.form.card_type'), :class => 'control-label'
+      .controls
+        = p.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]]
+    .control-group
+      = p.label :card_expires_on,I18n.t('purchase.form.card_expires'), :class => 'control-label'
+      .controls
+        = p.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :add_month_numbers => true
+    .actions
+      = f.submit I18n.t('admin.registrations.new.sign'), :class => "btn btn-primary offset3"

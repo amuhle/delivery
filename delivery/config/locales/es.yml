@@ -11,14 +11,11 @@ es:
     cancel: 'Cancelar'
     destroy: 'Eliminar'
     edit: 'Modificar'
-    sign_up: 'Acceder'
-    yes: 'Sí'
-    no: 'No'
-
-  status:
-    pending: 'Pendiente'
-    delivered: 'Entregado'
-    delayed: 'Retrasado'
+    sign_up_users: 'Acceso Usuarios'
+    sign_up_admins: 'Acceso Administrador'
+    actions: 'Acciones'
+    register: 'Registrarse'
+    are_you_sure: 'Esta seguro?'
 
   orders:
     
@@ -229,6 +226,167 @@ es:
       last_sing_in: 'Último ingreso'
       sing_in_count: 'Cantidad de ingresos'
       supplier: 'Proveedor'
+
+    confirmations:
+      title: 'Reenvio de instrucciones para confirmación'
+      resend: 'Reenviear instrucciones de confirmación'
+
+    mailer:
+      welcome: Bienvenido %{email}
+      message: 'Usted puede confirmar su cuenta de correo electrónico a través del siguiente enlace:'
+      confirm: 'Confirmar mi cuenta'
+
+    reset:
+      hello: Hola %{email}
+      message: 'Alguien ha pedido un enlace para cambiar su contraseña, y usted puede hacerlo a través del siguiente enlace.'
+      change: 'Cambiar mi password'
+      message2: 'Si no has solicitado esto, por favor ignora este mensaje.'
+      message3: 'Su contraseña no cambiará hasta que acceda al enlace anterior y crear uno nuevo.'
+
+    unlock:
+      hello: Hola %{email}
+      message: 'Su cuenta ha sido bloqueada debido a un exceso de intentos fallidos.'
+      message2: 'Haga click en el enlace de abajo para desbloquear su cuenta:'
+      unlock: 'Desbloquear mi cuenta'
+
+    password:
+
+      edit:
+        title: 'Cambio de Contraseña'
+        new_passwprd: 'Nueva contrseña'
+        confirm_password: 'Confirmar contraseña'
+        change: 'Cambiar mi contraseña'
+
+      new:
+        title: 'Olvido su contraseña?'
+        send: 'Enviarme las instrucciones de reinicio'
+
+    sessions:
+
+      new:
+        title: 'Ingreso'
+        password: 'Contrseña'
+        remember_me: 'Recordarme?'
+        sign_in: 'Ingresar'
+
+    shared:
+      sign_in: 'Ingresar'
+      sign_up: 'Registrarse'
+      forgot_password: 'Olvido su contraseña?'
+      confirmation_instructions: 'No ha recibido instrucciones de confirmación?'
+      unlock_instructions: 'No se recibido instrucciones de desbloqueo?'
+      sign_in_with: Conectado con %{provider}
+
+    unlock:
+      title: 'Reenvio instrucciones de desbloqueo'
+      resend: 'Reenviar instrucciones de desbloqueo'
+
+
+  admin:
+
+    confirmations:
+      title: 'Reenvio de instrucciones para confirmación'
+      resend: 'Reenviear instrucciones de confirmación'
+
+    mailer:
+      welcome: Bienvenido %{email}
+      message: 'Usted puede confirmar su cuenta de correo electrónico a través del siguiente enlace:'
+      confirm: 'Confirmar mi cuenta'
+
+    reset:
+      hello: Hola %{email}
+      message: 'Alguien ha pedido un enlace para cambiar su contraseña, y usted puede hacerlo a través del siguiente enlace.'
+      change: 'Cambiar mi password'
+      message2: 'Si no has solicitado esto, por favor ignora este mensaje.'
+      message3: 'Su contraseña no cambiará hasta que acceda al enlace anterior y crear uno nuevo.'
+
+    unlock:
+      hello: Hola %{email}
+      message: 'Su cuenta ha sido bloqueada debido a un exceso de intentos fallidos.'
+      message2: 'Haga click en el enlace de abajo para desbloquear su cuenta:'
+      unlock: 'Desbloquear mi cuenta'
+
+    password:
+      
+      edit:
+        title: 'Cambio de Contraseña'
+        new_passwprd: 'Nueva contrseña'
+        confirm_password: 'Confirmar contraseña'
+        change: 'Cambiar mi contraseña'
+
+      new:
+        title: 'Olvido su contraseña?'
+        send: 'Enviarme las instrucciones de reinicio'
+
+    registrations:
+
+      edit:
+        title: Edición de %{name}
+        password: 'Contraseña'
+        password_confirm: 'Confirmar Contraseña'
+        password_help: '(dejar en blanco si no quieres cambiarlo)'
+        current_password: 'Contraseña actual'
+        current_password_help: '(necesitamos tu contraseña actual para confirmar los cambios)'
+        cancel: 'Cancelar mi cuenta'
+        
+      new:
+        title: 'Registrarse'
+        password: 'Contrseña'
+        password_confirm: 'Confirmación de contraseña'
+        sign: 'Registrar'
+
+    sessions:
+
+      new:
+        title: 'Ingreso'
+        password: 'Contrseña'
+        remember_me: 'Recordarme?'
+        sign_in: 'Ingresar'
+
+    shared:
+      sign_in: 'Ingresar'
+      sign_up: 'Registrarse'
+      forgot_password: 'Olvido su contraseña?'
+      confirmation_instructions: 'No ha recibido instrucciones de confirmación?'
+      unlock_instructions: 'No se recibido instrucciones de desbloqueo?'
+      sign_in_with: Conectado con %{provider}
+
+    unlock:
+      title: 'Reenvio instrucciones de desbloqueo'
+      resend: 'Reenviar instrucciones de desbloqueo'
+
+  purchase:
+
+    form:
+      first_name: 'Nombre'
+      last_name: 'Apellido'
+      card_number: 'Número de tarjeta'
+      card_verification_value: 'Verificación de la tarjeta (CVV)'
+      card_type: 'Tipo de tarjeta'
+      card_expires: 'Fecha de vencimiento'
+      next: 'Continuar con el registro'
+
+    new:
+      title: 'Registro'
+
+  index:
+
+    more_information: 'Más información'
+
+    clients:
+      title: 'Clientes'
+      comments: 'Registre sus clientes en menos de 15 segundos. no existe manera mas fácil'
+      content: 'Cahchara de clientes'
+
+    products:
+      title: 'Productos'
+      comments: 'Consulte y gestione sus productos'
+      content: 'Chachara de productos'
+
+    orders:
+      title: 'Ordenes'
+      comments: 'Gestione y mantenga un registro actualizado de los estados de sus pedidos'
+      content: 'Chacharas de ordenes'
 
   date:
     abbr_day_names:

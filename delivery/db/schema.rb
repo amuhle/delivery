@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031161605) do
+ActiveRecord::Schema.define(:version => 20121107181525) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -88,6 +88,15 @@ ActiveRecord::Schema.define(:version => 20121031161605) do
     t.decimal "price"
   end
 
+  create_table "purchases", :force => true do |t|
+    t.integer "id_admin"
+    t.string  "ip_address"
+    t.string  "first_name"
+    t.string  "last_name"
+    t.string  "card_type"
+    t.date    "card_expires_on"
+  end
+
   create_table "suppliers", :force => true do |t|
     t.string   "name"
     t.string   "phone"
@@ -98,6 +107,16 @@ ActiveRecord::Schema.define(:version => 20121031161605) do
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
     t.integer  "last_order_number", :default => 0
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.integer "purchase_id"
+    t.string  "action"
+    t.integer "amount"
+    t.boolean "success"
+    t.string  "authorization"
+    t.string  "message"
+    t.text    "params"
   end
 
   create_table "users", :force => true do |t|

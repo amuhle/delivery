@@ -1,0 +1,34 @@
+= form_for @purchase, :html => { :class => 'form-horizontal' } do |f|
+  -if @purchase.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@purchase.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @purchase.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :first_name,I18n.t('purchase.form.first_name'), :class => 'control-label'
+    .controls
+      = f.text_field :first_name, :class => 'text_field'
+  .control-group
+    = f.label :last_name,I18n.t('purchase.form.last_name'), :class => 'control-label'
+    .controls
+      = f.text_field :last_name, :class => 'text_field'
+  .control-group
+    = f.label :card_number,I18n.t('purchase.form.card_number'), :class => 'control-label'
+    .controls
+      = f.number_field :card_number, :class => 'number_field'
+  .control-group
+    = f.label :card_verification,I18n.t('purchase.form.card_verification_value'), :class => 'control-label'
+    .controls
+      = f.text_field :card_verification, :class => 'text_field'
+  .control-group
+    = f.label :card_type,I18n.t('purchase.form.card_type'), :class => 'control-label'
+    .controls
+      = f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]]
+  .control-group
+    = f.label :card_expires_on,I18n.t('purchase.form.card_expires'), :class => 'control-label'
+    .controls
+      = f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :add_month_numbers => true
+  .form-actions
+    = f.submit I18n.t('purchase.form.next') , :class => 'btn btn-primary'

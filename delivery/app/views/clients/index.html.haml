@@ -8,9 +8,7 @@
     %th= t 'clients.index.email'
     %th= t 'clients.index.address'
     %th= t 'clients.index.phone'
-    %th
-    %th
-    %th
+    %th= t 'general.actions'
 
   - @clients.each do |client|
     %tr
@@ -20,9 +18,11 @@
       %td= client.email
       %td= client.address
       %td= client.phone
-      %td= link_to I18n.t('general.show'), client
-      %td= link_to I18n.t('general.edit'), edit_client_path(client)
-      %td= link_to I18n.t('general.destroy'), client, data: {:confirm => 'Are you sure?'}, :method => :delete
+      %td
+        .btn-group
+          = link_to I18n.t('general.show'), client, :class => 'btn btn-mini'
+          = link_to I18n.t('general.edit'), edit_client_path(client), :class => 'btn btn-mini'
+          = link_to I18n.t('general.destroy'), client, data: {:confirm => 'Are you sure?'}, :method => :delete, :class => 'btn btn-mini'
 
 %br
 

@@ -1,12 +1,13 @@
 class ProductsController < ApplicationController
-  before_filter [:authenticate_user!,:authenticate_admin!]
+  before_filter :authenticate_users
+
   # GET /products
   # GET /products.json
   def index
      @products
 
     if current_user
-      @products = current_user.supplier.clients 
+      @products = current_user.supplier.products 
     else
       @products = Product.all
     end

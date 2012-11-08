@@ -1,0 +1,21 @@
+%table{ id: 'tableProducts', class: 'table table-striped'}
+  %tbody 
+    %tr{id: '0'}
+      %th{ class: 'span2'}= I18n.t('orders.table_products.name')
+      %th{ class: 'span2'}= I18n.t('orders.table_products.quantity')
+      %th{ class: 'span2'}= I18n.t('orders.table_products.price')
+      %th{ calss: 'spna2'} Subtotal
+      %th{ class: 'span2'}= I18n.t('orders.table_products.options')
+      %th{ class: 'span2'}
+      - if !@order.blank? && !@order.product_orders.blank? 
+        - @order.product_orders.each do |p|
+          %tr{ id:p.product.id} 
+            %td= p.product.name
+            %td= p.quantity
+            %td= p.price 
+            %td= p.price * p.quantity
+            %td <a class="btn btn-link" id=p.product.id >eliminar</a>
+            %td <input type='hidden' value= p.quantity-p.price name='prod_ord-'p.product.id>
+.controls.controls-row.form-inline
+  = label_tag :total_lb, 'Total:', class: 'total', id: 'total_lb'
+  = label_tag :total, @order.total.to_s, class: 'total', id: 'total'

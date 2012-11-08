@@ -1,0 +1,71 @@
+// Place all the styles related to the index controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@import url(http://fonts.googleapis.com/css?family=Molle:400italic);
+@import url(http://fonts.googleapis.com/css?family=Petit+Formal+Script);
+@import url(http://fonts.googleapis.com/css?family=Kite+One);
+
+#articles{
+  column-count: 3;
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  -o-column-count: 3;
+  column-gap: 2em;
+  -webkit-column-gap: 2em;
+  -moz-column-gap: 2em;
+  -o-column-gap: 2em;
+  margin: 0 0 0 150px;
+
+  article{
+    margin: 10px; 
+    width: 250px;
+    height: 120px;
+	  padding: 8px 8px;
+	  font-size: 12px;
+	  color: #89897e;
+	  border: 1px solid #e5e5dd;
+	  background: #f4f4ed;
+    float: left;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    
+    p{
+      font-family: 'Kite One', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    header{
+      font-family: 'Molle', cursive; 
+      font-weight: 400;
+      font-size: 28px;
+      color: #cc6633;
+      text-align: center;
+      height: 30px;
+      top: 10px;
+    }
+    a{
+      background: #dde0ac;
+      font-weight: 400;
+      font-size: 12px;
+      font-family: 'Petit Formal Script', cursive; 
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+   }
+    a:hover {
+      background: #c4c799;
+      color: #cc6633;
+    }
+
+  }
+}
+#logo{
+  display: block;
+  margin-left: 420px;
+  margin-right: auto;
+}

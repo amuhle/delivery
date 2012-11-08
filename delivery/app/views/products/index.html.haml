@@ -6,18 +6,19 @@
     %th= I18n.t('products.index.description')
     %th= I18n.t('products.index.price')
     %th= I18n.t('products.index.tax')
-    %th 
-    %th 
-    %th 
+    %th= I18n.t('general.actions')
+
   - @products.each do |product|
     %tr
       %td= product.name
       %td= product.description
       %td= product.price
       %td= product.tax
-      %td= link_to I18n.t('general.show'), product
-      %td= link_to I18n.t('general.edit'), edit_product_path(product)
-      %td= link_to I18n.t('general.destroy'), product, :data => { :confirm => 'Are you sure?' }, :method => :delete
+      %td
+        .btn-group
+          = link_to I18n.t('general.show'), product, :class => 'btn btn-mini'
+          = link_to I18n.t('general.edit'), edit_product_path(product), :class => 'btn btn-mini'
+          = link_to I18n.t('general.destroy'), product, :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn btn-mini'
 %br
 
 = link_to I18n.t('products.index.new_product'), new_product_path

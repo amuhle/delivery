@@ -3,9 +3,7 @@
     %b= t 'layouts.menu.logged_in_as'
     %a.navbar-link
     - if current_user
-      = current_user.email
-      = link_to('Logout', destroy_user_session_path, :method => :delete)
+      = link_to("#{current_user.email}", destroy_user_session_path, :method => :delete,:class => 'navbar-link')
     - if current_admin
-      = current_admin.email
-      = link_to('Logout', destroy_admin_session_path, :method => :delete)
+      = link_to("#{current_admin.email}", destroy_admin_session_path, :method => :delete,:class => 'navbar-link')
 

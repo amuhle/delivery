@@ -226,8 +226,8 @@ jQuery ->
       data: {id: id,status: status}
       datatype: 'json'
       success:(json) ->
-        selected_row.classList.remove()
-        selected_row.addClass("#{json.status}") 
+        selected_row.removeClass()
+        selected_row.addClass(json.status) 
           
   $('table#tableOrders').on("change","tr #Status",changeStatusFromOrder)
 

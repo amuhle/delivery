@@ -1,0 +1,11 @@
+.nav-collapse.collapse
+  %p.navbar-text.pull-right
+    %a.navbar-link
+      %i.icon-user.icon-white
+      = link_to(I18n.t("general.sign_up_users"), user_session_path, :class => 'navbar-link')
+      \|
+      %i.icon-star.icon-white
+      = link_to(I18n.t("general.sign_up_admins"), admin_session_path, :class => 'navbar-link')
+      \|
+      %i.icon-pencil.icon-white
+      = link_to(I18n.t("general.register"), new_admin_registration_path,:class => "navbr-link")

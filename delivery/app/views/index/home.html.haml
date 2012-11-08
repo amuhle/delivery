@@ -1,0 +1,28 @@
+
+= image_tag('logo.png',:id=> 'logo')
+
+%section{ :id => "articles" }
+  .controls.form-inline
+    %article{:id => 'sc_clients'}
+      %header
+        = I18n.t('index.clients.title')
+      %p
+        = I18n.t('index.clients.comments')
+      %a{'class' => 'btn btn-mini','data-animation' => 'true','data-placement' => 'bottom','data-title' => "Clientes", 'data-event' => 'click', 'rel' => 'popover', 'data-content' => "#{I18n.t('index.clients.content')}"}
+        = I18n.t('index.more_information')
+
+    %article{:id => 'sc_products'}
+      %header
+        = I18n.t('index.products.title')
+      %p
+        = I18n.t('index.products.comments')
+      %a{'class' => 'btn btn-mini','data-animation' => 'true','data-placement' => 'bottom','data-title' => "Productos", 'data-event' => 'click', 'rel' => 'popover', 'data-content' => "#{I18n.t('index.products.content')}"}
+        = I18n.t('index.more_information')
+
+    %article{:id => 'sc_orders'}
+      %header
+        = I18n.t('index.orders.title')
+      %p
+        = I18n.t('index.orders.comments')
+      %a{'class' => 'btn btn-mini','data-animation' => 'true','data-placement' => 'bottom','data-title' => "Ordenes", 'data-event' => 'click', 'rel' => 'popover', 'data-content' => "#{I18n.t('index.orders.content')}"}
+        = I18n.t('index.more_information')

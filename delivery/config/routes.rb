@@ -1,6 +1,8 @@
 Delivery::Application.routes.draw do
 
-  devise_for :admins, :controllers => {:sessions => "sessions"}
+  get "index/home"
+
+  devise_for :admins, :controllers => { :sessions => "sessions", :registrations => "registrations"}
 
   resources :orders do 
     post :new_client, on: :collection
@@ -14,9 +16,7 @@ Delivery::Application.routes.draw do
 
   resources :products
 
-  devise_for :users, 
-    :skip => "registrations",
-    :controllers => {:sessions => "sessions"}
+  devise_for :users, :skip => "registrations",:controllers => { :sessions => "sessions" }
   
   resources :users
 
@@ -24,7 +24,7 @@ Delivery::Application.routes.draw do
     get :get_by_phone, on: :collection
   end
 
-
+  resources :purchases, :only => [:new, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -34,7 +34,7 @@ Delivery::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  #match '/purchase' => 'purchase#new', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
@@ -75,7 +75,7 @@ Delivery::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'orders#index'
+  root :to => 'index#home'
 
   # See how all your routes lay out with "rake routes"
 

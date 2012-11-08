@@ -1,0 +1,57 @@
+// Place all the styles related to the orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+ul.ui-autocomplete {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: solid 1px #999;
+  cursor: default;
+  li {
+    background-color: #FFF;
+    border-top: solid 1px #DDD;
+    margin: 0;
+    padding: 0;
+    a {
+      color: #000;
+      display: block;
+      padding: 3px;
+    }
+    a.ui-state-hover, a.ui-state-active {
+      background-color: #FFFCB2;
+    }
+  }
+}
+
+.Delivered{
+  background-color: #dff0d8;
+}
+
+.Delayed {
+  background-color: #f2dede;
+}
+
+#content_order_search{
+  column-count: 3;
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  -o-column-count: 3;
+  column-gap: 2em;
+  -webkit-column-gap: 2em;
+  -moz-column-gap: 2em;
+  -o-column-gap: 2em;
+
+  #q_due_date_gt{
+    margin-right: 10px;
+  }
+
+}
+
+#fieldset_products{
+
+  label,#product_name,#product_quantity{
+  margin: 0 10px 0 10px;
+  }
+
+}
