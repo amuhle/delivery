@@ -39,8 +39,14 @@ class OrdersController < ApplicationController
   def new
     @order    = Order.new
     @order.invoice_number = Order.last.blank? ? 1 : Order.last.invoice_number + 1
-    @clients  = current_user.supplier.clients
-    @products = Product.where(:supplier_id => current_user.supplier.id)
+    if current_user
+      @clients  = current_user.supplier.clients
+      @products = Product.where(:supplier_id => current_user.supplier.id)
+    else
+      @clients  = current_admin.supplier.clients
+      @products = Product.where(:supplier_id => current_admin.supplier.id)
+    end
+
     @client   = Client.new
 
     respond_to do |format|

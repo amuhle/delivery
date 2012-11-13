@@ -48,7 +48,11 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(params[:client])
-    @client.supplier_id = current_user.supplier.id
+    if current_user
+      @client.supplier_id = current_user.supplier.id
+    else
+      @client.supplier_id = current_admin.supplier.id
+    end
 
     respond_to do |format|
       if @client.save
