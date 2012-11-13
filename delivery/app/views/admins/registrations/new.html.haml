@@ -1,14 +1,22 @@
 %legend.legend= I18n.t('admin.registrations.new.title') 
 
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
-  = devise_error_messages! ##unless resource.nil?
-  
+  = devise_error_messages!
+
   - if @purchase.errors.any?
     #error_explanation
       %h2= "#{pluralize(@purchase.errors.count, "error")} prohibited this user from being saved:"
       %ul
         - @purchase.errors.full_messages.each do |msg|
           %li= msg
+
+  - unless @supplier.nil? 
+    - if @supplier.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@supplier.errors.count, "error")} prohibited this user from being saved:"
+        %ul
+          - @supplier.errors.full_messages.each do |msg|
+            %li= msg
 
   .control-group
     = f.label :email, :class => 'control-label'
@@ -48,5 +56,27 @@
       = p.label :card_expires_on,I18n.t('purchase.form.card_expires'), :class => 'control-label'
       .controls
         = p.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :add_month_numbers => true
-    .actions
-      = f.submit I18n.t('admin.registrations.new.sign'), :class => "btn btn-primary offset3"
+  = fields_for :supplier do |s|
+    .control-group
+      = s.label :name, I18n.t('suppliers.form.name'), :class => 'control-label'
+      .controls
+        = s.text_field :name
+    .control-group
+      = s.label :phone, I18n.t('suppliers.form.phone'), :class => 'control-label'
+      .controls
+        = s.text_field :phone
+    .control-group
+      = s.label :address, I18n.t('suppliers.form.address'), :class => 'control-label'
+      .controls
+        = s.text_field :address
+    .control-group
+      = s.label :rut, I18n.t('suppliers.form.rut'), :class => 'control-label'
+      .controls
+        = s.text_field :rut
+    .control-group
+      = s.label :contact_person, I18n.t('suppliers.form.contact_person'), :class => 'control-label'
+      .controls
+        = s.text_field :contact_person
+
+  .actions
+    = f.submit I18n.t('admin.registrations.new.sign'), :class => "btn btn-primary offset3"

@@ -5,10 +5,12 @@ class Admin < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
-  has_one :purchase
+  attr_accessible :email, :password, :password_confirmation, :remember_me,:supplier_id
+
+  belongs_to :purchase
+  belongs_to :supplier
+
   accepts_nested_attributes_for :purchase, :allow_destroy => true
+  accepts_nested_attributes_for :supplier, :allow_destroy => true
 
 end

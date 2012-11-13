@@ -2,19 +2,28 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     @purchase = Purchase.new
+    @supplier = Supplier.new
     super
   end
 
   def create
-    build_resource
-    resource.valid?
+    @admin = Admin.new(params[:admin],:supplier => params[:supplier],:purchase => params[:purchase])
     @purchase = Purchase.new(params[:purchase])
     @purchase.ip_address = request.remote_ip
-    if @purchase.save
+    @supplier = Supplier.new(params[:supplier])
+    @supplier.email = @admin.email
+    if @supplier.valid? && @purchase.valid? && @admin.valid?
+      @purchase.save
       if @purchase.purchase
-        @admin = Admin.new(params[:admin])
+        @supplier.save
+        @admin.supplier = @supplier
         @admin.purchase = @purchase
-        @admin.save
+        if @admin.save
+          flash[:notice] = "You have signed up successfully."
+          respond_with resource, :location => after_sign_up_path_for(resource)
+        else
+          render 'new'
+        end
       else
         render 'new'
       end

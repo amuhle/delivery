@@ -1,6 +1,4 @@
 class OrdersController < ApplicationController
-  before_filter :authenticate_users
-
 
   # GET /orders
   # GET /orders.json

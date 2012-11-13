@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121107181525) do
+ActiveRecord::Schema.define(:version => 20121109133546) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20121107181525) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "supplier_id"
   end
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
@@ -120,23 +121,6 @@ ActiveRecord::Schema.define(:version => 20121107181525) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "encrypted_password"
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count"
-    t.date     "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
-    t.integer  "supplier_id"
-    t.boolean  "is_admin"
-  end
-
-  create_table "users_old", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
@@ -153,8 +137,8 @@ ActiveRecord::Schema.define(:version => 20121107181525) do
     t.boolean  "is_admin"
   end
 
-  add_index "users_old", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users_old", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
-  add_index "users_old", ["supplier_id"], :name => "index_users_on_supplier_id"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["supplier_id"], :name => "index_users_on_supplier_id"
 
 end

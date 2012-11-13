@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  #before_filter :authenticate_admin!
+  before_filter :authenticate_admin!
 
   # GET /users
   # GET /users.json
@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-    @suppliers = Supplier.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -37,14 +36,13 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
-    @suppliers = Supplier.all
   end
 
   # POST /users
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
+    @user.supplier = current_admin.supplier
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }

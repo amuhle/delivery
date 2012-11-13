@@ -1,15 +1,14 @@
 class ClientsController < ApplicationController
-  before_filter :authenticate_users
 
   # GET /clients
   # GET /clients.json
   def index
-    @clients
-    
+    @clients = nil
+
     if current_user
       @clients = current_user.supplier.clients 
     else
-      @clients = Client.all
+      @clients = current_admin.supplier.clients
     end
 
     respond_to do |format|

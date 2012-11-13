@@ -159,10 +159,10 @@ es:
       tax: 'Impuesto'
       new_product: 'Ingresar Producto'
 
-  supplier:
+  suppliers:
 
     form:
-      name: 'Nombre'
+      name: 'Razón Social'
       rut: 'RUT'
       contact_person: 'Persona de contacto'
       email: 'Email'
@@ -375,18 +375,28 @@ es:
 
     clients:
       title: 'Clientes'
-      comments: 'Registre sus clientes en menos de 15 segundos. no existe manera mas fácil'
-      content: 'Cahchara de clientes'
+      comments: 'Registre sus clientes en menos de 15 segundos. No existe manera mas fácil.'
+      content: 'El sistema de Delivery le permite un fácil y rápido registro de clientes. Además le permite gestionar los mismos de una forma muy cómoda.'
 
     products:
       title: 'Productos'
-      comments: 'Consulte y gestione sus productos'
-      content: 'Chachara de productos'
+      comments: 'Consulte y gestione sus productos de manera sencilla.'
+      content: 'El sistema de Delivery le permite gestionar sus productos...'
 
     orders:
       title: 'Ordenes'
-      comments: 'Gestione y mantenga un registro actualizado de los estados de sus pedidos'
+      comments: 'Gestione y mantenga un registro actualizado de los estados de sus pedidos.'
       content: 'Chacharas de ordenes'
+
+  scripts:
+
+    orders:
+      already_added: 'El producto ya fue agregado'
+      choose_product: 'Debe seleccionar un producto'
+      product_unregistred: 'El %{product} no esta registrado'
+      greater_than: 
+        quantity: 'La cantidad debe ser mayor 0'
+        price: 'El precio debe ser mayor 0'
 
   date:
     abbr_day_names:

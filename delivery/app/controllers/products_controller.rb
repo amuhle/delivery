@@ -1,15 +1,14 @@
 class ProductsController < ApplicationController
-  before_filter :authenticate_users
 
   # GET /products
   # GET /products.json
   def index
-     @products
+     @products = nil
 
     if current_user
       @products = current_user.supplier.products 
     else
-      @products = Product.all
+      @products = current_admin.supplier.products
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -49,7 +48,11 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(params[:product])
-    @product.supplier_id = current_user.supplier.id
+    if current_user
+      @product.supplier_id = current_user.supplier.id
+    else
+      @product.supplier_id = current_admin.supplier_id
+    end
 
     respond_to do |format|
       if @product.save

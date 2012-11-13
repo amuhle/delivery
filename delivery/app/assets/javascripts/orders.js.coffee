@@ -66,7 +66,7 @@ jQuery ->
       for pr in products
         pr_id = $(pr).attr('id')
         if pr_id == prod_id
-          displayAlert('The product is already added')
+          displayAlert("#{I18n.t('scripts.orders.already_added')}")
           resetFields()
           valid = false
     valid
@@ -74,16 +74,16 @@ jQuery ->
   validateProduct =(idProduct,product,quantity,price) ->
     ret = true
     if product is ""
-      displayAlert("Must choose a prudct")
+      displayAlert("#{I18n.t('scripts.orders.chosse_product')}")
       ret = false
     else if idProduct == ""
-      displayAlert("the product #{product} is not registered")
+      displayAlert("#{I18n.t('scripts.orders.product_unregistred', product)}")
       ret = false
     else if quantity == 0
-      displayAlert("The quantity must be greater than 0")
+      displayAlert("#{I18n.t('scripts.orders.greater_than.quantity')}")
       ret = false
     else if price == 0
-      displayAlert("The price must be greater than 0")
+      displayAlert("#{I18n.t('scripts.orders.greater_than.price')}")
       ret = false
     else 
       ret = validateAddedProduct(idProduct)

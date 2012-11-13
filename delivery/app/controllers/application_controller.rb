@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
    end
 
   def authenticate_users
-    if user_signed_in? || admin_signed_in?
+    unless :user_signed_in? || :admin_signed_in?
       authenticate_user! || authenticate_admin!
     end
   end

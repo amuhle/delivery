@@ -1,4 +1,3 @@
-%p#notice= notice
 
 %h2= I18n.t('users.show.title')
 
@@ -10,16 +9,13 @@
   = @user.sign_in_count
 %p
   %b= I18n.t('users.show.last_sign_in_at')
-  = I18n.l @user.last_sign_in_at, :format => :short
+  = I18n.l @user.last_sign_in_at, :format => :short if @user.last_sign_in_at
 %p
   %b= I18n.t('users.show.created_at')
-  = I18n.l @user.created_at, :format => :short
+  = I18n.l @user.created_at, :format => :short if @user.created_at
 %p
   %b= I18n.t('users.show.updated_at')
-  = I18n.l @user.updated_at, :format => :short
-%p
-  %b= t 'users.supplier'
-  = @user.supplier.name
+  = I18n.l @user.updated_at, :format => :short if @user.updated_at
 
 = link_to I18n.t('general.edit'), edit_user_path(@user)
 \|
