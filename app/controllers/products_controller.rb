@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      format.html { render :layout => "show" }
+      format.html # { render :layout => "show" }
       format.json { render json: @product }
     end
   end
