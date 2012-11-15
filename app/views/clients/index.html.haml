@@ -20,9 +20,9 @@
       %td= client.phone
       %td
         .btn-group
-          = link_to I18n.t('general.show'), client, :class => 'btn btn-mini'
-          = link_to I18n.t('general.edit'), edit_client_path(client), :class => 'btn btn-mini'
-          = link_to I18n.t('general.destroy'), client, data: {:confirm => 'Are you sure?'}, :method => :delete, :class => 'btn btn-mini'
+          = link_to I18n.t('general.show'), client, :class => 'btn btn-mini', :id => 'client_show'
+          = link_to I18n.t('general.edit'), edit_client_path(client), :class => 'btn btn-mini', :id => 'client_edit'
+          = link_to I18n.t('general.destroy'), client, data: {:confirm => 'Are you sure?'}, :method => :delete, :class => 'btn btn-mini', :id => 'client_destroy'
 
 %br
 

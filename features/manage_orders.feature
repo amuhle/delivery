@@ -12,10 +12,10 @@ Feature: Manage Orders
       |XSeed                |19198980 |Marcelo  |Av. Italia 1223 of 191 |info@xseed.com       |27101200 | 1           |
       |Clinica Muhlethaler  |12322342 |Daniela  |Ellauri 891            |contacto@clinica.com |27110330 | 1           |
     And I have the following orders:
-      |notes                          |due_date        |total    |client_id  |user_id |delivery_address |
-      |La rucula cortada en trozos    |9/12/2012 16:30 |1300     |1          |1       | Av. Italia 1212 |
-      |Con factura                    |9/12/2012 13:00 |650.50   |2          |1       | Rincon 1212     |
-      |Tomate perita                  |9/13/2012 16:00 |1250     |1          |1       | Av. Italia 1212 |
+      |notes                          |due_date        |total    |client_id  |user_id |delivery_address |invoice_number|
+      |La rucula cortada en trozos    |9/12/2012 16:30 |1300     |1          |1       | Av. Italia 1212 | 1            |
+      |Con factura                    |9/12/2012 13:00 |650.50   |2          |1       | Rincon 1212     | 2            |
+      |Tomate perita                  |9/13/2012 16:00 |1250     |1          |1       | Av. Italia 1212 | 3            |
 
   Scenario: Order list
     When I am on the orders page
@@ -23,13 +23,21 @@ Feature: Manage Orders
 
   Scenario: New Order
     When I am on the new order page
-    And I select "VAIRIX" from "order_client_id"
+    When I check option_name
     And I fill in the following:
-      | Notes             | Test New Order      |
-      | Due date          | 10/1/2012 10:30     |
-      | Total             | 980                 |
-      | Delivery address  | Rincon 543          |
-    And I press "Save"
+      | search_client_name | VAIRIX |
+    And I fill in the following:
+      | product_name       | Computadora |
+      | product_quantity   | 2           |
+      | product_price      | 300         |
+    And I press "btn_add_product"
+    And I fill in the following:
+      | order_invoice_number   | 1               |
+      | order_notes            | Test New Order  |
+      | order_due_date         | 10/1/2012 10:30 |
+      | order_total            | 980             |
+      | order_delivery_address | Rincon 543      |
+    And I press "order_save"
     Then I am on the orders page
     And I should see "Test New Order" order
 

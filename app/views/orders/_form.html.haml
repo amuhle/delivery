@@ -55,7 +55,7 @@
       = f.label :delivery_address, I18n.t('orders.form.delivery_address')
       = f.text_field :delivery_address, class: 'span4'
     .actions
-      = f.submit I18n.t('general.save'), class: "btn btn-primary"
+      = f.submit I18n.t('general.save'), class: "btn btn-primary" , id: "order_save"
 
 %div{'aria-hidden'=>'true', 'aria-labelledby'=>'myModalLabel', 'role'=>'dialog', 'tabindex'=>'-1', 'class'=>'modal hide fade', 'id'=>'modalNewClient', 'style'=>'display: none;'}
   %div{'class'=>'modal-header'}

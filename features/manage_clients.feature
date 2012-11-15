@@ -20,35 +20,35 @@ Feature: Manage Clients
   Scenario: New Client
     When I am on the new client page
     And I fill in the following:
-      | Name     | Coca-Cola           |
-      | Rut      | 19098989            |
-      | Contact  | Carlos Gutierrez    |
-      | Email    | carlitos@gmail.com  |
-      | Address  | Colonia 2232 ap 109 |
-      | Phone    | 29089898            |
+      | client_name     | Coca-Cola           |
+      | client_rut      | 19098989            |
+      | client_contact  | Carlos Gutierrez    |
+      | client_email    | carlitos@gmail.com  |
+      | client_address  | Colonia 2232 ap 109 |
+      | client_phone    | 29089898            |
 
-    And I press "Save" 
+    And I press "client_save"
     Then I am on the clients page
     And I should see "Coca-Cola" client
 
   Scenario: Edit Client
     When I am on the clients page
-    And I follow the "Edit" link for "VAIRIX"
-    And I fill in "Rut" with "19000000"
-    And I press "Save"
+    And I follow the "client_edit" link for "VAIRIX"
+    And I fill in "client_rut" with "19000000"
+    And I press "client_save"
     Then I visit "VAIRIX" client details
     And I should see "19000000"
 
   Scenario: Delete Client
     When I am on the clients page
-    And I follow the "Destroy" link for "XSeed"
+    And I follow the "client_destroy" link for "XSeed"
     And I confirm popup
     Then I am on the clients page
     And I should not see "XSeed"
 
   Scenario: Show Client
     When I am on the clients page
-    And I follow the "Show" link for "VAIRIX"
+    And I follow the "client_show" link for "VAIRIX"
     Then I should see "19089098"
     And I should see "VAIRIX"
     And I should see "Alvaro"
