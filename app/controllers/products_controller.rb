@@ -3,13 +3,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-     @products = nil
+     @products = @current_suppllier.products
 
-    if current_user
-      @products = current_user.supplier.products 
-    else
-      @products = current_admin.supplier.products
-    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }
@@ -19,10 +14,11 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      format.html # { render :layout => "show" }
+      format.html  # render show.html.haml
       format.json { render json: @product }
     end
   end
@@ -48,11 +44,8 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(params[:product])
-    if current_user
-      @product.supplier_id = current_user.supplier.id
-    else
-      @product.supplier_id = current_admin.supplier_id
-    end
+    @product.supplier_id = @current_suppllier.id
+
 
     respond_to do |format|
       if @product.save

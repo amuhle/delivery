@@ -51,13 +51,14 @@ jQuery ->
     $('#client_address').val('')
     $('#client_email').val('')
     $('#client_phone').val('')
-  
-  displayAlert = (mensaje) ->
-    $('#alert').attr('style','display:block')
-    $('#error_message').text("#{mensaje}")
-  
-  $('#close_message').click ->
-    $('#alert').attr('style','display:none')
+
+  displayAlert = (id_alert) ->
+   $("#alert_#{id_alert}").attr('style','display:block')
+
+  hideAlert = ->
+    $(this).parent().hide()
+
+  $('#errors').on("click","button.close",hideAlert)
 
   validateAddedProduct = (prod_id)->
     valid = true
@@ -66,7 +67,7 @@ jQuery ->
       for pr in products
         pr_id = $(pr).attr('id')
         if pr_id == prod_id
-          displayAlert("#{I18n.t('scripts.orders.already_added')}")
+          displayAlert('already_added')
           resetFields()
           valid = false
     valid
@@ -74,16 +75,16 @@ jQuery ->
   validateProduct =(idProduct,product,quantity,price) ->
     ret = true
     if product is ""
-      displayAlert("#{I18n.t('scripts.orders.chosse_product')}")
+      displayAlert('chosse_product')
       ret = false
     else if idProduct == ""
-      displayAlert("#{I18n.t('scripts.orders.product_unregistred', product)}")
+      displayAlert('product}')
       ret = false
     else if quantity == 0
-      displayAlert("#{I18n.t('scripts.orders.greater_than.quantity')}")
+      displayAlert('quantity')
       ret = false
     else if price == 0
-      displayAlert("#{I18n.t('scripts.orders.greater_than.price')}")
+      displayAlert('price')
       ret = false
     else 
       ret = validateAddedProduct(idProduct)
@@ -98,7 +99,7 @@ jQuery ->
     price = $('#product_price').val()
     price = parseFloat(price.replace(",",""))
     total = parseFloat($("#total").text())
-    if not $.isNumeric(total)
+    unless $.isNumeric(total)
       total = 0
     prod_id = $('#product_id').val()
     validator = validateProduct(prod_id,product,quantity,price)

@@ -5,10 +5,32 @@
       %ul
         - @order.errors.full_messages.each do |msg|
           %li= msg
-  
-  .alert.alert-error{ :id => 'alert', :style => 'display:none'}
-    %button{ "type" => "button", "class" => "close", "id" => "close_message"}×
-    = label_tag :error, '', :id => 'error_message'
+  #errors
+    .alert.alert-error.fade.in{'style' => 'display:none', 'id' => 'alert_chosse_product' }
+      %button.close{:type => "button"} ×
+      %h4.alert-heading 
+        = I18n.t("scripts.orders.chosse_product")
+
+    .alert.alert-error.fade.in{'style' => 'display:none', 'id' => 'alert_product'}
+      %button.close{:type => "button"} ×
+      %h4.alert-heading
+        = I18n.t("scripts.orders.product_unregistred")
+
+    .alert.alert-error.fade.in{'style' => 'display:none', 'id' => 'alert_quantity'}
+      %button.close{:type => "button"} ×
+      %h4.alert-heading
+        = I18n.t("scripts.orders.greater_than.quantity")
+
+    .alert.alert-error.fade.in{'style' => 'display:none', 'id' => 'alert_price'}
+      %button.close{:type => "button"} ×
+      %h4.alert-heading 
+        = I18n.t("scripts.orders.greater_than.price")
+
+    .alert.alert-error.fade.in{'style' => 'display:none', 'id' => 'alert_already_added'}
+      %button.close{:type => "button"} ×
+      %h4.alert-heading 
+        = I18n.t("scripts.orders.already_added")
+
   %section
     %header
       %h1 

@@ -39,13 +39,8 @@ class OrdersController < ApplicationController
   def new
     @order    = Order.new
     @order.invoice_number = Order.last.blank? ? 1 : Order.last.invoice_number.to_i + 1
-    if current_user
-      @clients  = current_user.supplier.clients
-      @products = Product.where(:supplier_id => current_user.supplier.id)
-    else
-      @clients  = current_admin.supplier.clients
-      @products = Product.where(:supplier_id => current_admin.supplier.id)
-    end
+    @clients  = @current_suppllier.clients
+    @products = @current_suppllier.products
 
     @client   = Client.new
 
@@ -98,7 +93,7 @@ class OrdersController < ApplicationController
   # PUT /orders/1.json
   def update
     @order = Order.find(params[:id])
-    @clients = current_user.supplier.clients
+    @clients = @current_suppllier.clients
     @products = ProductOrder.where(:order_id => @order.id)
     respond_to do |format|
       if @order.update_attributes(params[:order])

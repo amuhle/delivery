@@ -3,13 +3,7 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = nil
-
-    if current_user
-      @clients = current_user.supplier.clients 
-    else
-      @clients = current_admin.supplier.clients
-    end
+    @clients = @current_suppllier.clients
 
     respond_to do |format|
       format.html # index.html.erb
@@ -48,11 +42,7 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(params[:client])
-    if current_user
-      @client.supplier_id = current_user.supplier.id
-    else
-      @client.supplier_id = current_admin.supplier.id
-    end
+    @client.supplier_id = @current_suppllier.id
 
     respond_to do |format|
       if @client.save

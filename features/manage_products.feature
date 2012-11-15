@@ -6,10 +6,10 @@ Feature: Manage Products
 
   Background:
     Given I have the following products:
-      |name                 |description        |price    | supplier_id |
-      |pencil               |blue pencil uni    |45.50    | 1           |
-      |notebook             |macbook pro        |1299.00  | 1           |
-      |eraser               |White eraser gummy |15.00    | 1           |
+      |name                 |description        |price|tax    | supplier_id |
+      |pencil               |blue pencil uni    |45.50|10.00    | 1           |
+      |notebook             |macbook pro        |1299.00|22.00  | 1           |
+      |eraser               |White eraser gummy |15.00|22.00    | 1           |
     And I am a new, authenticated user
 
   Scenario: Product list

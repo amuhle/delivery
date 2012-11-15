@@ -392,7 +392,7 @@ es:
 
     orders:
       already_added: 'El producto ya fue agregado'
-      choose_product: 'Debe seleccionar un producto'
+      chosse_product: 'Debe seleccionar un producto'
       product_unregistred: 'El %{product} no esta registrado'
       greater_than: 
         quantity: 'La cantidad debe ser mayor 0'
