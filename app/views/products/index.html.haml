@@ -16,9 +16,9 @@
       %td= product.tax
       %td
         .btn-group
-          = link_to I18n.t('general.show'), product, :class => 'btn btn-mini'
-          = link_to I18n.t('general.edit'), edit_product_path(product), :class => 'btn btn-mini'
-          = link_to I18n.t('general.destroy'), product, :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn btn-mini'
+          = link_to I18n.t('general.show'), product, :class => 'btn btn-mini', id: 'product_show'
+          = link_to I18n.t('general.edit'), edit_product_path(product), :class => 'btn btn-mini', id: 'product_edit'
+          = link_to I18n.t('general.destroy'), product, :data => { :confirm => 'Are you sure?' }, :method => :delete, :class => 'btn btn-mini',id: 'product_destroy'
 %br
 
 = link_to I18n.t('products.index.new_product'), new_product_path

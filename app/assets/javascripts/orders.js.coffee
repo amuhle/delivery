@@ -74,16 +74,16 @@ jQuery ->
 
   validateProduct =(idProduct,product,quantity,price) ->
     ret = true
-    if product is ""
+    if product?
       displayAlert('chosse_product')
       ret = false
-    else if idProduct == ""
-      displayAlert('product}')
+    else if idProduct?
+      displayAlert('product')
       ret = false
-    else if quantity == 0
+    else if quantity?
       displayAlert('quantity')
       ret = false
-    else if price == 0
+    else if price?
       displayAlert('price')
       ret = false
     else 

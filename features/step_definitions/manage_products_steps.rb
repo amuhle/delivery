@@ -1,6 +1,6 @@
 Given /^I have the following products:$/ do |table|
   table.hashes.each do |product|
-    Product.create!( name: product[:name], description: product[:description], price: product[:price],tax: prodcut[:tax] ,supplier_id: product[:supplier_id] )
+    Product.create!( name: product[:name], description: product[:description], price: product[:price], tax: product[:tax] ,supplier_id: product[:supplier_id] )
   end
 
 end

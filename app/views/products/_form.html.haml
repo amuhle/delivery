@@ -19,4 +19,4 @@
     = f.label :tax,I18n.t('products.form.tax')
     = f.select :tax, options_for_select(@taxs,:selected=> @product.tax)
   .actions
-    = f.submit I18n.t('general.save'), class: "btn btn-primary"
+    = f.submit I18n.t('general.save'), class: "btn btn-primary", id: 'product_save'
