@@ -34,7 +34,7 @@ es:
     
     add_prdocut:
       name: 'Nombre:'
-      price: 'Price:'
+      price: 'Precio:'
       quantity: 'Cantidad:'
       add: 'Agregar Producto'
       detaill: 'Detalle'
