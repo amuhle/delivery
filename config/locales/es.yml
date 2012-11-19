@@ -16,6 +16,8 @@ es:
     actions: 'Acciones'
     register: 'Registrarse'
     are_you_sure: 'Esta seguro?'
+    yes: 'Si'
+    no: 'No'
 
   orders:
     

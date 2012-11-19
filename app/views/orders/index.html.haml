@@ -17,10 +17,10 @@
           = f.text_field :due_date_lt, value: (params['q']['due_date_lt'] unless params['q'].nil?), :class => 'input-small'
         .field
           = f.label :pay, I18n.t('orders.index.pay')
-          = f.select :pay_eq, options_for_select([['No',false],['Yes',true]], (params['q']['pay_eq'] unless params['q'].nil?)),:include_blank => true
+          = f.select :pay_eq, options_for_select([[I18n.t('general.no'),false],[I18n.t('general.yes'),true]], (params['q']['pay_eq'] unless params['q'].nil?)),:include_blank => true
         .field
           = f.label :active, I18n.t('orders.index.active'), :class => 'control-label'
-          = f.select :active_eq, options_for_select([['No',false],['Yes',true]], (params['q']['active_eq'] unless params['q'].nil?)),:include_blank => true 
+          = f.select :active_eq, options_for_select([[I18n.t('general.no'),false],[I18n.t('general.yes'),true]], (params['q']['active_eq'] unless params['q'].nil?)),:include_blank => true 
         .field
           = f.label :status,I18n.t('orders.index.status')
           .controls.form-inline

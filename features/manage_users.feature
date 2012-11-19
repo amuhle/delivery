@@ -59,4 +59,21 @@ Feature: Manage User
     Then the field "user_email" should have the error "Email no puede estar en blanco"
     And the field "user_password" should have the error "Password no puede estar en blanco"
 
+    When I am on the new user page
+    And I fill in the following:
+      | user_email                 | prueba2@prueba.com |
+      | user_password              | prueba             |
+      | user_password_confirmation |                    |
 
+    And I press "user_save"
+    Then the field "user_email" should have the error "Email ya ha sido tomado"
+    And the field "user_password" should have the error "Password no coincide con la confirmación"
+
+    When I am on the new user page
+    And I fill in the following:
+      | user_email                 | prueba5@prueba.com |
+      | user_password              | prueba             |
+      | user_password_confirmation | pruebas            |
+
+    And I press "user_save"
+    Then the field "user_password" should have the error "Password no coincide con la confirmación"
