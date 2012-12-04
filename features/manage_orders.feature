@@ -4,7 +4,7 @@ Feature: Manage Orders
   As an User
   I want to create and manage orders
 
-  Background: 
+  Background:
     Given I am a new, authenticated user
     And I have the following clients:
       |name                 |rut      |contact  |address                |email                |phone    | supplier_id |
@@ -23,7 +23,7 @@ Feature: Manage Orders
 
   Scenario: New Order
     When I am on the new order page
-    When I check option_name
+    When I choose "option_name"
     And I fill in the following:
       | search_client_name | VAIRIX |
     And I fill in the following:
@@ -35,26 +35,10 @@ Feature: Manage Orders
       | order_invoice_number   | 1               |
       | order_notes            | Test New Order  |
       | order_due_date         | 10/1/2012 10:30 |
-      | order_total            | 980             |
       | order_delivery_address | Rincon 543      |
     And I press "order_save"
     Then I am on the orders page
     And I should see "Test New Order" order
-
-  Scenario: Edit Order
-    When I am on the orders page
-    And I follow the "Edit" link for "1"
-    And I fill in "Delivery address" with "Buenos Aires 121"
-    And I press "Save"
-    Then I visit "1" order details
-    And I should see "Buenos Aires 121"
-
-  Scenario: Delete Order
-    When I am on the orders page
-    And I follow the "Destroy" link for "1"
-    And I confirm popup
-    Then I am on the orders page
-    And I should not see "rucula"
 
   Scenario: Show Order
     When I am on the orders page
@@ -62,3 +46,27 @@ Feature: Manage Orders
     Then I should see "rucula"
     And I should see "1300"
     And I should see "Av. Italia"
+
+
+  Scenario: Autocomplete product
+    When I am on the new order page
+    When I choose "option_name"
+    When I fill in "search_client_name" with "VAI"
+    And I wait for 2 seconds
+      Then I should see "VAIRIX"
+    When I follow "VAIRIX"
+    Then the field "option_name" should contain "VAIRIX"
+    And I fill in the following:
+      | product_name       | Computadora |
+      | product_quantity   | 2           |
+      | product_price      | 300         |
+    And I press "btn_add_product"
+    And I fill in the following:
+      | order_invoice_number   | 1               |
+      | order_notes            | Test New Order  |
+      | order_due_date         | 10/1/2012 10:30 |
+      | order_delivery_address | Rincon 543      |
+    And I press "order_save"
+    Then I am on the orders page
+    And I should see "Test New Order" order
+

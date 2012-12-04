@@ -27,7 +27,6 @@ class OrdersController < ApplicationController
   # GET /orders/1.json
   def show
     @order = Order.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @order }
@@ -61,7 +60,11 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(params[:order])
-    @order.user = current_user
+    if current_user
+      @order.user = current_user
+    elsif current_admin
+      @order.admin = current_admin
+    end
     unless params[:id_client].blank?
       @order.client_id = params[:id_client]
     end

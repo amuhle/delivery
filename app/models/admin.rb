@@ -9,6 +9,7 @@ class Admin < ActiveRecord::Base
 
   belongs_to :purchase
   belongs_to :supplier
+  has_many :orders
 
   accepts_nested_attributes_for :purchase, :allow_destroy => true
   accepts_nested_attributes_for :supplier, :allow_destroy => true

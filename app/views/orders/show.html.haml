@@ -21,9 +21,14 @@
           %tr
             %th= t 'orders.view.client'
             %td= @order.client.name if @order.client
-          %tr
-            %th= t 'orders.view.user'
-            %td= @order.user.email if @order.user
+          - if @order.user.blank?
+            %tr
+              %th= t 'orders.view.admin'
+              %td= @order.admin.email
+          - elsif
+            %tr
+              %th= t 'orders.view.user'
+              %td= @order.user.email
           %tr
             %th= t 'orders.view.delivery_address'
             %td= @order.delivery_address
@@ -41,13 +46,13 @@
       %th{ class: 'span2'}= t 'orders.view.quantity'
       %th{ class: 'span2'}= t 'orders.view.price'
       %th{ calss: 'spna2'} Subtotal
-      - if !@order.blank? && !@order.product_orders.blank?  
-        - @order.product_orders.each do |p|
-          %tr{ id:p.product.id} 
-            %td= p.product.name
-            %td= p.quantity
-            %td= p.price 
-            %td= p.price * p.quantity
+      - if !@order.blank? && !@order.product_orders.blank?
+        - @order.product_orders.each do |product|
+          %tr#product.id
+            %td= product.product.name
+            %td= product.quantity
+            %td= product.price
+            %td= product.price * product.quantity
 
 
 = link_to I18n.t('general.back'), orders_path

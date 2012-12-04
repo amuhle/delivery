@@ -16,6 +16,8 @@ module NavigationHelpers
       "/orders"
     when /^the clients page$/ then 
       '/clients'
+    when /^the new client page$/ then 
+      '/clients/new'
     when /^the edit client page for "(.+)"$/ then
       cli = Client.find_by_name($1)
       edit_client_path(cli)
